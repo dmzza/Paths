@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapBox/MapBox.h>
 
-@interface PKDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface PKDetailViewController : UIViewController <UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) id detailItem;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+//@property (strong, nonatomic) IBOutlet RMMapView *mapView;
+@property (strong, nonatomic) RMMapView *mapView;
+@property (strong, nonatomic) RMMapBoxSource *tileSource;
+
 @end
