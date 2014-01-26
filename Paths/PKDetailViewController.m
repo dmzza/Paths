@@ -35,12 +35,8 @@
 {
     if (self.detailItem) {
         
-        self.mapView = [[RMMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 400)];
-        self.tileSource = [[RMMapBoxSource alloc] initWithMapID:@"dmzza.h26oci6o"];
         
-        [self.mapView setTileSource:self.tileSource];
-        [self.mapView setTileSourcesZoom:12.0];
-        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.705, -73.979)];
+        
     }
 }
 
@@ -95,14 +91,52 @@
     
     
     if(indexPath.section == 0 && indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Map" forIndexPath:indexPath];
-        [cell addSubview:self.mapView];
+        PKMapTableViewCell *cell = (PKMapTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MapTableViewCell" forIndexPath:indexPath];
+        
+        cell.mapView.tileSource = [[RMMapBoxSource alloc] initWithMapID:@"dmzza.h26oci6o"];
+        
+        
+        RMPolylineAnnotation *path = [[RMPolylineAnnotation alloc] initWithMapView:cell.mapView points:@[  [[CLLocation alloc] initWithLatitude:40.70478207881243 longitude:-74.01502132415771],
+                                                                                                           [[CLLocation alloc] initWithLatitude:40.70624605943045 longitude:-74.0143346786499],
+                                                                                                           [[CLLocation alloc] initWithLatitude:40.70662018264773 longitude:-74.01375532150269],
+                                                                                                           [[CLLocation alloc] initWithLatitude:40.71831453993334 longitude:-74.0053653717041],
+                                                                                                           [[CLLocation alloc] initWithLatitude:40.72203873705941 longitude:-74.00538682937622],
+                                                                                                           [[CLLocation alloc] initWithLatitude:40.72977919627727 longitude:-74.00221109390259]
+                                                                                                           ]];
+        
+        [cell.mapView addAnnotation:path];
+        [cell.mapView setTileSourcesZoom:12.0];
+        [cell.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.705, -73.979)];
         return cell;
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.textLabel.text = @"Verrazano";
+        PKPhotoTableViewCell *cell = (PKPhotoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"PhotoTableViewCell" forIndexPath:indexPath];
+        cell.headline.text = @"Verrazano";
+        cell.subheadline.text = @"Narrows Bridge";
         return cell;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if(section == 1) {
+        return self.pathLineView;
+    }
+    return nil;
+}
+
+#pragma mark - Collection view
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    PKPathMarkerCell *cell = (PKPathMarkerCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MarkerCell" forIndexPath:indexPath];
+    
+    return cell;
 }
 
 #pragma mark - Split view

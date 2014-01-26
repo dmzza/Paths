@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <MapBox/MapBox.h>
+#import "PKPhotoTableViewCell.h"
+#import "PKMapTableViewCell.h"
+#import "PKPathMarkerCell.h"
 
-@interface PKDetailViewController : UIViewController <UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface PKDetailViewController : UITableViewController <UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) id detailItem;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
-//@property (strong, nonatomic) IBOutlet RMMapView *mapView;
-@property (strong, nonatomic) RMMapView *mapView;
+//@property (strong, nonatomic) RMMapView *mapView;
 @property (strong, nonatomic) RMMapBoxSource *tileSource;
 
+@property (strong, nonatomic) IBOutlet UICollectionView *pathLineView;
 @end
