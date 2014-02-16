@@ -474,9 +474,9 @@
 				GCC_PREFIX_HEADER = "Paths/Paths-Prefix.pch";
 				INFOPLIST_FILE = "Paths/Paths-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -492,8 +492,9 @@
 				GCC_PREFIX_HEADER = "Paths/Paths-Prefix.pch";
 				INFOPLIST_FILE = "Paths/Paths-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

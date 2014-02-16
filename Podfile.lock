@@ -26,7 +26,7 @@ PODS:
   - GRMustache (5.4.3):
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
-  - MapBox (1.0.3):
+  - MapBox (1.1.0):
     - FMDB (= 2.0)
     - GRMustache (= 5.4.3)
     - SMCalloutView (= 1.1)
@@ -39,11 +39,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
-  FMDB: 370eb54b9f057aa4de7cf9c757d103b21ee30ecc
+  FMDB: a1fcc5227e7f38288f1b04b20045b9fdb8c92622
   GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
   GRMustache: f97f90a320c36896b08ca2624003e4ab8da7cfb1
   JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
-  MapBox: a79e58567fdae62c5d213344db4b6c740c240922
+  MapBox: 45fea4cb7c21c1f6f5da36de8f8235137c04988b
   SMCalloutView: 1c7d62044508a8d405c25495c380b17c613f769e
 
 COCOAPODS: 0.29.0

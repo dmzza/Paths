@@ -12,12 +12,14 @@
 #import "PKMapTableViewCell.h"
 #import "PKPathMarkerCell.h"
 
-@interface PKDetailViewController : UITableViewController <UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PKDetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
 
-//@property (strong, nonatomic) RMMapView *mapView;
-@property (strong, nonatomic) RMMapBoxSource *tileSource;
+@property (strong, nonatomic) IBOutlet RMMapView *mapView;
+@property (strong, nonatomic) RMMapboxSource *tileSource;
+@property (strong, nonatomic) IBOutlet UIView *photoCard;
+@property (strong, nonatomic) IBOutlet UILabel *streetLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *photoView;
 
-@property (strong, nonatomic) IBOutlet UICollectionView *pathLineView;
 @end
