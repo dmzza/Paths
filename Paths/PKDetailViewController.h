@@ -21,5 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIView *photoCard;
 @property (strong, nonatomic) IBOutlet UILabel *streetLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *photoView;
+@property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIAttachmentBehavior *centerAttachment;
 
 @end

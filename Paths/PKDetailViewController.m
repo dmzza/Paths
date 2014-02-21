@@ -8,7 +8,10 @@
 
 #import "PKDetailViewController.h"
 
-@implementation PKDetailViewController
+@implementation PKDetailViewController {
+    CGPoint dragStart;
+    CGPoint centerStart;
+}
 
 - (void)awakeFromNib
 {
@@ -58,6 +61,8 @@
     [self.streetLabel setText:@"Verrazano-Narrows Bridge"];
     [self.photoView setImage:[UIImage imageNamed:@"verrazano.png"]];
     
+    
+    
 }
 
 - (void)viewDidLoad
@@ -65,6 +70,37 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    UIDynamicAnimator *dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.centerAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.photoCard attachedToAnchor:self.photoCard.center];
+    [self.centerAttachment setLength:0.5];
+    [self.centerAttachment setFrequency:6];
+    [self.centerAttachment setDamping:2];
+    
+    [dynamicAnimator addBehavior:self.centerAttachment];
+    
+    self.animator = dynamicAnimator;
+}
+
+- (IBAction)dragCard:(UIPanGestureRecognizer *)gesture {
+    CGPoint positionInWindow = [gesture locationInView:self.view];
+    
+    if (gesture.state == UIGestureRecognizerStateBegan && CGRectContainsPoint(self.photoCard.frame, positionInWindow)) {
+        [self.animator removeBehavior:self.centerAttachment];
+        dragStart = [gesture locationInView:self.view];
+        centerStart = self.photoCard.center;
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self.animator addBehavior:self.centerAttachment];
+    } else {
+        CGPoint newCenter = CGPointMake(positionInWindow.x - dragStart.x + centerStart.x, positionInWindow.y - dragStart.y + centerStart.y);
+        
+        [self.photoCard setCenter:newCenter];
+    }
 }
 
 - (void)didReceiveMemoryWarning
