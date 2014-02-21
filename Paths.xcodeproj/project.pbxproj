@@ -30,6 +30,7 @@
 		631E6E9D188D00E300823A3E /* PathsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E6E9C188D00E300823A3E /* PathsTests.m */; };
 		631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */; };
 		631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */; };
+		AAAD8A6D18B7D2C500FEB115 /* PKPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPhotoTableViewCell.m; sourceTree = "<group>"; };
 		631EB0D0188FEE130016C4CB /* PKMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapTableViewCell.h; sourceTree = "<group>"; };
 		631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapTableViewCell.m; sourceTree = "<group>"; };
+		AAAD8A6B18B7D2C500FEB115 /* PKPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPointViewController.h; sourceTree = "<group>"; };
+		AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPointViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 				631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */,
 				630C1906189472D6003818E5 /* PKPathMarkerCell.h */,
 				630C1907189472D6003818E5 /* PKPathMarkerCell.m */,
+				AAAD8A6B18B7D2C500FEB115 /* PKPointViewController.h */,
+				AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				631E6E74188D00E200823A3E /* main.m in Sources */,
 				631E6E78188D00E200823A3E /* PKAppDelegate.m in Sources */,
 				631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */,
+				AAAD8A6D18B7D2C500FEB115 /* PKPointViewController.m in Sources */,
 				630C1908189472D6003818E5 /* PKPathMarkerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

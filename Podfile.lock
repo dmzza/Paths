@@ -26,16 +26,20 @@ PODS:
   - GRMustache (5.4.3):
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
+  - JVFloatLabeledTextField (0.0.5)
   - MapBox (1.1.0):
     - FMDB (= 2.0)
     - GRMustache (= 5.4.3)
     - SMCalloutView (= 1.1)
   - SMCalloutView (1.1)
+  - TPKeyboardAvoiding (1.2.3)
 
 DEPENDENCIES:
   - AFNetworking
   - GoogleAnalytics-iOS-SDK
+  - JVFloatLabeledTextField
   - MapBox
+  - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
@@ -43,7 +47,9 @@ SPEC CHECKSUMS:
   GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
   GRMustache: f97f90a320c36896b08ca2624003e4ab8da7cfb1
   JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
+  JVFloatLabeledTextField: 7daac42f450476dc9cfa5b23645e8661b868994b
   MapBox: 45fea4cb7c21c1f6f5da36de8f8235137c04988b
   SMCalloutView: 1c7d62044508a8d405c25495c380b17c613f769e
+  TPKeyboardAvoiding: 17995aaa6db26ac2a9fa8714a86509c5888f0392
 
 COCOAPODS: 0.29.0
