@@ -251,13 +251,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Photo" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2z-ko-fb8" customClass="JVFloatLabeledTextField">
-                                                    <rect key="frame" x="20" y="0.0" width="300" height="43"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEK-v6-Mg4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <state key="normal" title="Choose photo">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="choosePhoto:" destination="8Pb-dv-9rf" eventType="touchUpInside" id="n6D-qv-ShM"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mG9-Yv-7nv">
+                                                    <rect key="frame" x="20" y="0.0" width="44" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -302,8 +311,10 @@
                     <connections>
                         <outlet property="mapView" destination="Nft-aC-6fy" id="6LS-7e-ihl"/>
                         <outlet property="nameField" destination="88C-Ub-clg" id="hZp-uR-RTz"/>
+                        <outlet property="photoButton" destination="CEK-v6-Mg4" id="6At-z1-fu5"/>
                         <outlet property="saveButton" destination="yaz-GF-Tbq" id="YI2-g2-R21"/>
                         <outlet property="streetField" destination="npe-Qa-k8k" id="6DD-Se-TgD"/>
+                        <outlet property="thumbnailView" destination="mG9-Yv-7nv" id="V69-gP-rsp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYq-3g-Cgd" userLabel="First Responder" sceneMemberID="firstResponder"/>

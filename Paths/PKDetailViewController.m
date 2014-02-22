@@ -11,6 +11,7 @@
 @implementation PKDetailViewController {
     CGPoint dragStart;
     CGPoint centerStart;
+    BOOL mapIsConfigured;
 }
 
 @synthesize mapView;
@@ -71,6 +72,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    mapIsConfigured = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,16 +89,20 @@
     
     self.animator = dynamicAnimator;
     
-    [self.mapView addTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]];
-    [self.mapView setTileSourcesZoom:12.0];
-    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.620, -74.040)];
+    if (!mapIsConfigured) {
+        [self.mapView addTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]];
+        [self.mapView setTileSourcesZoom:12.0];
+        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.620, -74.040)];
+        [self.mapView setDelegate:self];
+        mapIsConfigured = YES;
+    }
     
-    
-    
+    [self.mapView removeAllAnnotations];
     for (NSManagedObject *p in [self.fetchedPeaksController fetchedObjects]) {
         Peak *peak = (Peak *)p;
         RMPointAnnotation *pin = [RMPointAnnotation annotationWithMapView:self.mapView coordinate:CLLocationCoordinate2DMake(peak.latitude, peak.longitude) andTitle:peak.street];
         
+        [pin setUserInfo:peak];
         [self.mapView addAnnotation:pin];
     }
     
@@ -130,6 +136,7 @@
     newPeak.longitude = aLocation.longitude;
     newPeak.street = aStreet;
     newPeak.name = aName;
+    newPeak.photo = aUrl;
     
     [self dismissViewControllerAnimated:YES completion:^{
         // Save the context.
@@ -147,7 +154,21 @@
 
 # pragma mark - Map View Delegate
 
-
+- (void)mapView:(RMMapView *)mapView didSelectAnnotation:(RMAnnotation *)annotation
+{
+    Peak *peak = (Peak *)annotation.userInfo;
+    
+    self.streetLabel.text = peak.street;
+    if (peak.photo) {
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:[NSURL URLWithString:peak.photo] resultBlock:^(ALAsset *asset) {
+            ALAssetRepresentation *represenation = [asset defaultRepresentation];
+            [self.photoView setImage:[UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]]];
+        } failureBlock:^(NSError *error) {
+            // TODO
+        }];
+    }
+}
 
 # pragma mark - Navigation
 
@@ -203,13 +224,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.mapView removeAllAnnotations];
-    for (NSManagedObject *p in [self.fetchedPeaksController fetchedObjects]) {
-        Peak *peak = (Peak *)p;
-        RMPointAnnotation *pin = [RMPointAnnotation annotationWithMapView:self.mapView coordinate:CLLocationCoordinate2DMake(peak.latitude, peak.longitude) andTitle:peak.street];
-        
-        [self.mapView addAnnotation:pin];
-    }
+    
 }
 
 - (void)didReceiveMemoryWarning

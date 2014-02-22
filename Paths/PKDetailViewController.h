@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapBox/MapBox.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "PKPhotoTableViewCell.h"
 #import "PKMapTableViewCell.h"
 #import "PKPathMarkerCell.h"

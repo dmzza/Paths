@@ -30,6 +30,7 @@
 		631E6E9D188D00E300823A3E /* PathsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E6E9C188D00E300823A3E /* PathsTests.m */; };
 		631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */; };
 		631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */; };
+		AA790FC918B94FA500FF08CB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA790FC818B94FA500FF08CB /* AssetsLibrary.framework */; };
 		AAAD8A6D18B7D2C500FEB115 /* PKPeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */; };
 		AAAD8A7318B800F600FEB115 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7218B800F600FEB115 /* Path.m */; };
 		AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAD8A7418B863D800FEB115 /* CoreLocation.framework */; };
@@ -79,6 +80,7 @@
 		631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPhotoTableViewCell.m; sourceTree = "<group>"; };
 		631EB0D0188FEE130016C4CB /* PKMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapTableViewCell.h; sourceTree = "<group>"; };
 		631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapTableViewCell.m; sourceTree = "<group>"; };
+		AA790FC818B94FA500FF08CB /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		AAAD8A6B18B7D2C500FEB115 /* PKPeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPeakViewController.h; sourceTree = "<group>"; };
 		AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPeakViewController.m; sourceTree = "<group>"; };
 		AAAD8A7118B800F500FEB115 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA790FC918B94FA500FF08CB /* AssetsLibrary.framework in Frameworks */,
 				AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */,
 				631E6E68188D00E200823A3E /* CoreGraphics.framework in Frameworks */,
 				631E6E6C188D00E200823A3E /* CoreData.framework in Frameworks */,
@@ -139,6 +142,7 @@
 		631E6E64188D00E200823A3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA790FC818B94FA500FF08CB /* AssetsLibrary.framework */,
 				AAAD8A7418B863D800FEB115 /* CoreLocation.framework */,
 				631E6E65188D00E200823A3E /* Foundation.framework */,
 				631E6E67188D00E200823A3E /* CoreGraphics.framework */,
