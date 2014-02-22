@@ -30,7 +30,10 @@
 		631E6E9D188D00E300823A3E /* PathsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E6E9C188D00E300823A3E /* PathsTests.m */; };
 		631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */; };
 		631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */; };
-		AAAD8A6D18B7D2C500FEB115 /* PKPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */; };
+		AAAD8A6D18B7D2C500FEB115 /* PKPeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */; };
+		AAAD8A7318B800F600FEB115 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7218B800F600FEB115 /* Path.m */; };
+		AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAD8A7418B863D800FEB115 /* CoreLocation.framework */; };
+		AAAD8A7B18B864B200FEB115 /* Peak.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7A18B864B200FEB115 /* Peak.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,8 +79,13 @@
 		631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPhotoTableViewCell.m; sourceTree = "<group>"; };
 		631EB0D0188FEE130016C4CB /* PKMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapTableViewCell.h; sourceTree = "<group>"; };
 		631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapTableViewCell.m; sourceTree = "<group>"; };
-		AAAD8A6B18B7D2C500FEB115 /* PKPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPointViewController.h; sourceTree = "<group>"; };
-		AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPointViewController.m; sourceTree = "<group>"; };
+		AAAD8A6B18B7D2C500FEB115 /* PKPeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPeakViewController.h; sourceTree = "<group>"; };
+		AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPeakViewController.m; sourceTree = "<group>"; };
+		AAAD8A7118B800F500FEB115 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		AAAD8A7218B800F600FEB115 /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
+		AAAD8A7418B863D800FEB115 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AAAD8A7918B864B200FEB115 /* Peak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peak.h; path = ../Peak.h; sourceTree = "<group>"; };
+		AAAD8A7A18B864B200FEB115 /* Peak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peak.m; path = ../Peak.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */,
 				631E6E68188D00E200823A3E /* CoreGraphics.framework in Frameworks */,
 				631E6E6C188D00E200823A3E /* CoreData.framework in Frameworks */,
 				631E6E6A188D00E200823A3E /* UIKit.framework in Frameworks */,
@@ -130,6 +139,7 @@
 		631E6E64188D00E200823A3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAAD8A7418B863D800FEB115 /* CoreLocation.framework */,
 				631E6E65188D00E200823A3E /* Foundation.framework */,
 				631E6E67188D00E200823A3E /* CoreGraphics.framework */,
 				631E6E69188D00E200823A3E /* UIKit.framework */,
@@ -160,8 +170,12 @@
 				631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */,
 				630C1906189472D6003818E5 /* PKPathMarkerCell.h */,
 				630C1907189472D6003818E5 /* PKPathMarkerCell.m */,
-				AAAD8A6B18B7D2C500FEB115 /* PKPointViewController.h */,
-				AAAD8A6C18B7D2C500FEB115 /* PKPointViewController.m */,
+				AAAD8A6B18B7D2C500FEB115 /* PKPeakViewController.h */,
+				AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */,
+				AAAD8A7118B800F500FEB115 /* Path.h */,
+				AAAD8A7218B800F600FEB115 /* Path.m */,
+				AAAD8A7918B864B200FEB115 /* Peak.h */,
+				AAAD8A7A18B864B200FEB115 /* Peak.m */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
@@ -245,6 +259,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Peaking Software LLC";
 				TargetAttributes = {
+					631E6E61188D00E200823A3E = {
+						DevelopmentTeam = DNPVU838JE;
+					};
 					631E6E8D188D00E300823A3E = {
 						TestTargetID = 631E6E61188D00E200823A3E;
 					};
@@ -331,12 +348,14 @@
 			files = (
 				631E6E81188D00E200823A3E /* Paths.xcdatamodeld in Sources */,
 				631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */,
+				AAAD8A7318B800F600FEB115 /* Path.m in Sources */,
+				AAAD8A7B18B864B200FEB115 /* Peak.m in Sources */,
 				631E6E84188D00E200823A3E /* PKMasterViewController.m in Sources */,
 				631E6E87188D00E200823A3E /* PKDetailViewController.m in Sources */,
 				631E6E74188D00E200823A3E /* main.m in Sources */,
 				631E6E78188D00E200823A3E /* PKAppDelegate.m in Sources */,
 				631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */,
-				AAAD8A6D18B7D2C500FEB115 /* PKPointViewController.m in Sources */,
+				AAAD8A6D18B7D2C500FEB115 /* PKPeakViewController.m in Sources */,
 				630C1908189472D6003818E5 /* PKPathMarkerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,12 +495,15 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paths/Paths-Prefix.pch";
 				INFOPLIST_FILE = "Paths/Paths-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -494,12 +516,15 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Paths/Paths-Prefix.pch";
 				INFOPLIST_FILE = "Paths/Paths-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

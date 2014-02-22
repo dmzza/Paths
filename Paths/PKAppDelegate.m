@@ -9,6 +9,7 @@
 #import "PKAppDelegate.h"
 
 #import "PKMasterViewController.h"
+#import "PKDetailViewController.h"
 
 @implementation PKAppDelegate
 
@@ -31,6 +32,8 @@
         /*UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
         PKMasterViewController *controller = (PKMasterViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;*/
+        PKDetailViewController *controller = (PKDetailViewController *)self.window.rootViewController;
+        controller.managedObjectContext = self.managedObjectContext;
     }
     return YES;
 }

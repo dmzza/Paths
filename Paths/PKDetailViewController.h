@@ -11,10 +11,14 @@
 #import "PKPhotoTableViewCell.h"
 #import "PKMapTableViewCell.h"
 #import "PKPathMarkerCell.h"
+#import "PKPeakViewController.h"
+#import "Peak.h"
 
-@interface PKDetailViewController : UIViewController
+@interface PKDetailViewController : UIViewController <NSFetchedResultsControllerDelegate, PKPeakViewControllerDelegate, RMMapViewDelegate>
 
 @property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (strong, nonatomic) IBOutlet RMMapView *mapView;
 @property (strong, nonatomic) RMMapboxSource *tileSource;
