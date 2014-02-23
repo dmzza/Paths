@@ -12,6 +12,8 @@
     CGPoint dragStart;
     CGPoint centerStart;
     BOOL mapIsConfigured;
+    Peak *nextPeak;
+    UIImage *nextPhoto;
 }
 
 @synthesize mapView;
@@ -80,10 +82,16 @@
     [super viewDidAppear:animated];
     
     UIDynamicAnimator *dynamicAnimator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    [dynamicAnimator setDelegate:self];
     self.centerAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.photoCard attachedToAnchor:self.photoCard.center];
     [self.centerAttachment setLength:0.5];
     [self.centerAttachment setFrequency:6];
     [self.centerAttachment setDamping:2];
+    
+    self.leftAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.photoCard attachedToAnchor:CGPointMake(-160, self.photoCard.center.y)];
+    [self.leftAttachment setLength:0.5];
+    [self.leftAttachment setFrequency:6];
+    [self.leftAttachment setDamping:2];
     
     [dynamicAnimator addBehavior:self.centerAttachment];
     
@@ -156,18 +164,43 @@
 
 - (void)mapView:(RMMapView *)mapView didSelectAnnotation:(RMAnnotation *)annotation
 {
-    Peak *peak = (Peak *)annotation.userInfo;
+    nextPeak = (Peak *)annotation.userInfo;
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    //__weak PKDetailViewController* weakSelf = self;
     
-    self.streetLabel.text = peak.street;
-    if (peak.photo) {
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        [library assetForURL:[NSURL URLWithString:peak.photo] resultBlock:^(ALAsset *asset) {
-            ALAssetRepresentation *represenation = [asset defaultRepresentation];
-            [self.photoView setImage:[UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]]];
-        } failureBlock:^(NSError *error) {
-            // TODO
-        }];
+    [self.animator removeBehavior:self.centerAttachment];
+    [self.animator addBehavior:self.leftAttachment];
+    
+    [library assetForURL:[NSURL URLWithString:nextPeak.photo] resultBlock:^(ALAsset *asset) {
+        
+        ALAssetRepresentation *represenation = [asset defaultRepresentation];
+        
+        nextPhoto = [UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]];
+        
+        
+    } failureBlock:^(NSError *error) {
+        // TODO
+    }];
+}
+
+# pragma mark - Animator Delegate
+
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+{
+    if (nextPeak) {
+        
+        self.streetLabel.text = nextPeak.street;
+        self.photoView.image = nextPhoto;
+        [self.animator removeBehavior:self.leftAttachment];
+        [self.animator addBehavior:self.centerAttachment];
+        
+        nextPeak = nil;
     }
+}
+
+- (void)dynamicAnimatorWillResume:(UIDynamicAnimator *)animator
+{
+    
 }
 
 # pragma mark - Navigation

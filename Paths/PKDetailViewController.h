@@ -15,7 +15,7 @@
 #import "PKPeakViewController.h"
 #import "Peak.h"
 
-@interface PKDetailViewController : UIViewController <NSFetchedResultsControllerDelegate, PKPeakViewControllerDelegate, RMMapViewDelegate>
+@interface PKDetailViewController : UIViewController <NSFetchedResultsControllerDelegate, PKPeakViewControllerDelegate, RMMapViewDelegate, UIDynamicAnimatorDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
@@ -29,5 +29,6 @@
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) UIAttachmentBehavior *centerAttachment;
+@property (strong, nonatomic) UIAttachmentBehavior *leftAttachment;
 
 @end
