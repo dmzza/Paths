@@ -124,12 +124,21 @@
         dragStart = [gesture locationInView:self.view];
         centerStart = self.photoCard.center;
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self.animator addBehavior:self.centerAttachment];
+        if (positionInWindow.x - dragStart.x < -100) { // EAST
+            [self selectNearestAnnotationInDirection:PKDirectionEast];
+        } else
+            [self.animator addBehavior:self.centerAttachment];
     } else {
         CGPoint newCenter = CGPointMake(positionInWindow.x - dragStart.x + centerStart.x, positionInWindow.y - dragStart.y + centerStart.y);
         
         [self.photoCard setCenter:newCenter];
     }
+}
+
+- (void)selectNearestAnnotationInDirection:(PKDirection)aDirection
+{
+    NSUInteger randomIndex = arc4random() % [[self.mapView annotations] count];
+    [self.mapView selectAnnotation:[[self.mapView annotations] objectAtIndex:randomIndex] animated:YES];
 }
 
 # pragma mark - Peak VC Delegate

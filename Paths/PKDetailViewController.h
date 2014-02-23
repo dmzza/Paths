@@ -15,6 +15,13 @@
 #import "PKPeakViewController.h"
 #import "Peak.h"
 
+typedef NS_ENUM(NSInteger, PKDirection) {
+    PKDirectionNorth,
+    PKDirectionEast,
+    PKDirectionSouth,
+    PKDirectionWest
+};
+
 @interface PKDetailViewController : UIViewController <NSFetchedResultsControllerDelegate, PKPeakViewControllerDelegate, RMMapViewDelegate, UIDynamicAnimatorDelegate>
 
 @property (strong, nonatomic) id detailItem;
