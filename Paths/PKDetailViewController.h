@@ -38,5 +38,6 @@ typedef NS_ENUM(NSInteger, PKDirection) {
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) UIAttachmentBehavior *centerAttachment;
 @property (strong, nonatomic) UIAttachmentBehavior *leftAttachment;
+@property (strong, nonatomic) UIAttachmentBehavior *rightAttachment;
 
 @end

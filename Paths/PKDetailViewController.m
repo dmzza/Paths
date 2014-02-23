@@ -93,6 +93,11 @@
     [self.leftAttachment setFrequency:12];
     [self.leftAttachment setDamping:4];
     
+    self.rightAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.photoCard attachedToAnchor:CGPointMake(320+160, self.photoCard.center.y)];
+    [self.rightAttachment setLength:0.5];
+    [self.rightAttachment setFrequency:12];
+    [self.rightAttachment setDamping:4];
+    
     [dynamicAnimator addBehavior:self.centerAttachment];
     
     self.animator = dynamicAnimator;
@@ -139,6 +144,8 @@
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         if (positionInWindow.x - dragStart.x < -100) { // EAST
             [self selectNearestAnnotationInDirection:PKDirectionEast];
+        } else if (positionInWindow.x - dragStart.x > 100) { // WEST
+            [self selectNearestAnnotationInDirection:PKDirectionWest];
         } else
             [self.animator addBehavior:self.centerAttachment];
     } else {
@@ -150,6 +157,20 @@
 
 - (void)selectNearestAnnotationInDirection:(PKDirection)aDirection
 {
+    [self.animator removeBehavior:self.centerAttachment];
+    switch (aDirection) {
+        case PKDirectionEast:
+            [self.animator addBehavior:self.leftAttachment];
+            break;
+            
+        case PKDirectionWest:
+            [self.animator addBehavior:self.rightAttachment];
+            break;
+            
+        default:
+            break;
+    }
+    
     NSUInteger randomIndex;
     do {
         randomIndex = arc4random() % [[self.mapView annotations] count];
@@ -194,8 +215,11 @@
     //ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     //__weak PKDetailViewController* weakSelf = self;
     
-    [self.animator removeBehavior:self.centerAttachment];
-    [self.animator addBehavior:self.leftAttachment];
+    if ([[self.animator behaviors] containsObject:self.centerAttachment]) {
+        [self.animator removeBehavior:self.centerAttachment];
+        [self.animator addBehavior:self.leftAttachment];
+    }
+    
     [self performSelector:@selector(dynamicAnimatorDidPause:) withObject:self.animator afterDelay:0.3];
     
     /*[library assetForURL:[NSURL URLWithString:nextPeak.photo] resultBlock:^(ALAsset *asset) {
@@ -225,8 +249,13 @@
             self.streetLabel.text = @"";
         }
         self.photoView.image = nextPhoto;
-        [self.animator removeBehavior:self.leftAttachment];
-        [self.photoCard setFrame:CGRectMake(320, self.photoCard.frame.origin.y, self.photoCard.frame.size.width, self.photoCard.frame.size.height)];
+        if ([[self.animator behaviors] containsObject:self.leftAttachment]) {
+            [self.animator removeBehavior:self.leftAttachment];
+            [self.photoCard setFrame:CGRectMake(320, self.photoCard.frame.origin.y, self.photoCard.frame.size.width, self.photoCard.frame.size.height)];
+        } else if ([[self.animator behaviors] containsObject:self.rightAttachment]) {
+            [self.animator removeBehavior:self.rightAttachment];
+            [self.photoCard setFrame:CGRectMake(-320, self.photoCard.frame.origin.y, self.photoCard.frame.size.width, self.photoCard.frame.size.height)];
+        }
         [self.animator addBehavior:self.centerAttachment];
         
         nextPeak = nil;
