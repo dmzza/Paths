@@ -196,6 +196,7 @@
     
     [self.animator removeBehavior:self.centerAttachment];
     [self.animator addBehavior:self.leftAttachment];
+    [self performSelector:@selector(dynamicAnimatorDidPause:) withObject:self.animator afterDelay:0.3];
     
     /*[library assetForURL:[NSURL URLWithString:nextPeak.photo] resultBlock:^(ALAsset *asset) {
         
