@@ -157,7 +157,7 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.12378884106874466" green="0.14446727931499481" blue="0.13854324817657471" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FOB-A7-KSZ" firstAttribute="top" secondItem="Ex1-kc-3jk" secondAttribute="bottom" constant="7" id="8CS-gj-39u"/>
                             <constraint firstAttribute="centerX" secondItem="Ex1-kc-3jk" secondAttribute="centerX" id="qAl-2g-cA0"/>
