@@ -212,7 +212,13 @@
 {
     if (nextPeak) {
         
-        self.streetLabel.text = nextPeak.street;
+        if (![nextPeak.name isEqualToString:@""]) {
+            self.nameLabel.text = nextPeak.name;
+            self.streetLabel.text = nextPeak.street;
+        } else {
+            self.nameLabel.text = nextPeak.street;
+            self.streetLabel.text = @"";
+        }
         self.photoView.image = nextPhoto;
         [self.animator removeBehavior:self.leftAttachment];
         [self.photoCard setFrame:CGRectMake(320, self.photoCard.frame.origin.y, self.photoCard.frame.size.width, self.photoCard.frame.size.height)];

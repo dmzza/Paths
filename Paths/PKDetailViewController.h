@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, PKDirection) {
 @property (strong, nonatomic) IBOutlet RMMapView *mapView;
 @property (strong, nonatomic) RMMapboxSource *tileSource;
 @property (strong, nonatomic) IBOutlet UIView *photoCard;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *streetLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *photoView;
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
