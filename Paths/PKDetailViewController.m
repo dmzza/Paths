@@ -109,9 +109,22 @@
     for (NSManagedObject *p in [self.fetchedPeaksController fetchedObjects]) {
         Peak *peak = (Peak *)p;
         RMPointAnnotation *pin = [RMPointAnnotation annotationWithMapView:self.mapView coordinate:CLLocationCoordinate2DMake(peak.latitude, peak.longitude) andTitle:peak.street];
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         
-        [pin setUserInfo:peak];
-        [self.mapView addAnnotation:pin];
+        [library assetForURL:[NSURL URLWithString:peak.photo] resultBlock:^(ALAsset *asset) {
+            
+            ALAssetRepresentation *represenation = [asset defaultRepresentation];
+            
+            peak.photoImage = [UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]];
+            [pin setUserInfo:peak];
+            [self.mapView addAnnotation:pin];
+            
+        } failureBlock:^(NSError *error) {
+            // TODO
+        }];
+        
+        
+        
     }
     
 }
@@ -174,13 +187,13 @@
 - (void)mapView:(RMMapView *)mapView didSelectAnnotation:(RMAnnotation *)annotation
 {
     nextPeak = (Peak *)annotation.userInfo;
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    //ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     //__weak PKDetailViewController* weakSelf = self;
     
     [self.animator removeBehavior:self.centerAttachment];
     [self.animator addBehavior:self.leftAttachment];
     
-    [library assetForURL:[NSURL URLWithString:nextPeak.photo] resultBlock:^(ALAsset *asset) {
+    /*[library assetForURL:[NSURL URLWithString:nextPeak.photo] resultBlock:^(ALAsset *asset) {
         
         ALAssetRepresentation *represenation = [asset defaultRepresentation];
         
@@ -189,7 +202,8 @@
         
     } failureBlock:^(NSError *error) {
         // TODO
-    }];
+    }];*/
+    nextPhoto = nextPeak.photoImage;
 }
 
 # pragma mark - Animator Delegate

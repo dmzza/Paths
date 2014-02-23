@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * photo;
 @property (nonatomic, retain) Path *path;
+@property (nonatomic, strong) UIImage *photoImage;
 
 @end

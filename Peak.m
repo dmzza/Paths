@@ -18,5 +18,6 @@
 @dynamic name;
 @dynamic photo;
 @dynamic path;
+@synthesize photoImage;
 
 @end
