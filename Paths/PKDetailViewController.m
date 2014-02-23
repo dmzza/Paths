@@ -150,7 +150,11 @@
 
 - (void)selectNearestAnnotationInDirection:(PKDirection)aDirection
 {
-    NSUInteger randomIndex = arc4random() % [[self.mapView annotations] count];
+    NSUInteger randomIndex;
+    do {
+        randomIndex = arc4random() % [[self.mapView annotations] count];
+    } while ( [(RMAnnotation *)[[self.mapView annotations] objectAtIndex:randomIndex] isEqual:[self.mapView selectedAnnotation]] );
+    
     [self.mapView selectAnnotation:[[self.mapView annotations] objectAtIndex:randomIndex] animated:YES];
 }
 
