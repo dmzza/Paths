@@ -90,8 +90,8 @@
     
     self.leftAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.photoCard attachedToAnchor:CGPointMake(-160, self.photoCard.center.y)];
     [self.leftAttachment setLength:0.5];
-    [self.leftAttachment setFrequency:6];
-    [self.leftAttachment setDamping:2];
+    [self.leftAttachment setFrequency:12];
+    [self.leftAttachment setDamping:4];
     
     [dynamicAnimator addBehavior:self.centerAttachment];
     
@@ -192,6 +192,7 @@
         self.streetLabel.text = nextPeak.street;
         self.photoView.image = nextPhoto;
         [self.animator removeBehavior:self.leftAttachment];
+        [self.photoCard setFrame:CGRectMake(320, self.photoCard.frame.origin.y, self.photoCard.frame.size.width, self.photoCard.frame.size.height)];
         [self.animator addBehavior:self.centerAttachment];
         
         nextPeak = nil;
