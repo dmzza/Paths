@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, PKDirection) {
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @property (strong, nonatomic) IBOutlet RMMapView *mapView;
-@property (strong, nonatomic) RMMapboxSource *tileSource;
+@property (strong, nonatomic) RMMapboxSource *cleanTileSource;
+@property (strong, nonatomic) RMMapboxSource *streetTileSource;
 @property (strong, nonatomic) IBOutlet UIView *photoCard;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *streetLabel;

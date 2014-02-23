@@ -102,8 +102,11 @@
     
     self.animator = dynamicAnimator;
     
+    self.cleanTileSource = [[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"];
+    self.streetTileSource = [[RMMapboxSource alloc] initWithMapID:@"dmzza.hbn76bcd"];
+    
     if (!mapIsConfigured) {
-        [self.mapView addTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]];
+        [self.mapView setTileSource:self.cleanTileSource];
         [self.mapView setTileSourcesZoom:12.0];
         [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.620, -74.040)];
         [self.mapView setDelegate:self];
@@ -233,6 +236,16 @@
         // TODO
     }];*/
     nextPhoto = nextPeak.photoImage;
+}
+
+- (void)mapViewRegionDidChange:(RMMapView *)aMapView
+{
+    NSLog(@"changed %f", aMapView.tileSourcesZoom);
+    if (aMapView.tileSourcesZoom >= 14 && [aMapView.tileSource isEqual:self.cleanTileSource]) {
+        self.mapView.tileSource = self.streetTileSource;
+    } else if (aMapView.tileSourcesZoom < 14 && [aMapView.tileSource isEqual:self.streetTileSource]) {
+        self.mapView.tileSource = self.cleanTileSource;
+    }
 }
 
 # pragma mark - Animator Delegate
