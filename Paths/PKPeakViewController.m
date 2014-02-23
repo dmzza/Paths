@@ -38,9 +38,9 @@
     [super viewDidAppear:animated];
     
     if (!mapIsConfigured) {
-        [self.mapView addTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]];
-        [self.mapView setTileSourcesZoom:12.0];
-        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(40.620, -74.040)];
+        [self.mapView addTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.hbn76bcd"]];
+        [self.mapView setTileSourcesZoom:16.0];
+        [self.mapView setUserTrackingMode:RMUserTrackingModeFollow];
         mapIsConfigured = YES;
     }
 }
