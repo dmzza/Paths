@@ -17,12 +17,12 @@
 @interface PKPeakViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak) id <PKPeakViewControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet RMMapView *mapView;
-@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *streetField;
-@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *nameField;
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
-@property (weak, nonatomic) IBOutlet UIButton *photoButton;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet RMMapView *mapView;
+@property (strong, nonatomic) IBOutlet JVFloatLabeledTextField *streetField;
+@property (strong, nonatomic) IBOutlet JVFloatLabeledTextField *nameField;
+@property (strong, nonatomic) IBOutlet UIImageView *thumbnailView;
+@property (strong, nonatomic) IBOutlet UIButton *photoButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) NSString *assetUrl;
 
 @end
