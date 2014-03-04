@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class PKDetailViewController;
+@class PKPageViewController;
 
 #import <CoreData/CoreData.h>
 
 @interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) PKDetailViewController *detailViewController;
+@property (strong, nonatomic) PKPageViewController *detailViewController;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

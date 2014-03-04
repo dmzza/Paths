@@ -8,8 +8,10 @@
 
 #import "PKAppDelegate.h"
 
+#import "PKSplitViewController.h"
 #import "PKMasterViewController.h"
 #import "PKDetailViewController.h"
+#import "PKPageViewController.h"
 
 @implementation PKAppDelegate
 
@@ -21,13 +23,19 @@
 {
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        PKSplitViewController *splitViewController = (PKSplitViewController *)self.window.rootViewController;
+        splitViewController.managedObjectContext = self.managedObjectContext;
+        /*UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
         
         UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        PKMasterViewController *controller = (PKMasterViewController *)masterNavigationController.topViewController;
-        controller.managedObjectContext = self.managedObjectContext;
+        PKMasterViewController *controller = (PKMasterViewController *)masterNavigationController.topViewController;*/
+        
+        /*PKPageViewController *pageViewController = (PKPageViewController *)[splitViewController.childViewControllers lastObject];
+        PKMasterViewController *masterViewController = (PKMasterViewController *)splitViewController.childViewControllers[0];
+        
+        masterViewController.managedObjectContext = self.managedObjectContext;*/
+        
     } else {
         /*UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
         PKMasterViewController *controller = (PKMasterViewController *)navigationController.topViewController;

@@ -30,7 +30,11 @@
 		631E6E9D188D00E300823A3E /* PathsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E6E9C188D00E300823A3E /* PathsTests.m */; };
 		631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */; };
 		631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */; };
+		AA27197C18C2DFF200E3767A /* PKPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27197B18C2DFF200E3767A /* PKPageViewController.m */; };
+		AA27197F18C2FC7400E3767A /* PKPeakPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA27197E18C2FC7400E3767A /* PKPeakPageViewController.m */; };
 		AA790FC918B94FA500FF08CB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA790FC818B94FA500FF08CB /* AssetsLibrary.framework */; };
+		AA93417118C327EE00B32C22 /* PKSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA93417018C327EE00B32C22 /* PKSplitViewController.m */; };
+		AA93417418C32F5E00B32C22 /* PKThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA93417318C32F5E00B32C22 /* PKThumbnailCell.m */; };
 		AAAD8A6D18B7D2C500FEB115 /* PKPeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */; };
 		AAAD8A7318B800F600FEB115 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7218B800F600FEB115 /* Path.m */; };
 		AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAD8A7418B863D800FEB115 /* CoreLocation.framework */; };
@@ -80,7 +84,15 @@
 		631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPhotoTableViewCell.m; sourceTree = "<group>"; };
 		631EB0D0188FEE130016C4CB /* PKMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapTableViewCell.h; sourceTree = "<group>"; };
 		631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapTableViewCell.m; sourceTree = "<group>"; };
+		AA27197A18C2DFF200E3767A /* PKPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPageViewController.h; sourceTree = "<group>"; };
+		AA27197B18C2DFF200E3767A /* PKPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPageViewController.m; sourceTree = "<group>"; };
+		AA27197D18C2FC7400E3767A /* PKPeakPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPeakPageViewController.h; sourceTree = "<group>"; };
+		AA27197E18C2FC7400E3767A /* PKPeakPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPeakPageViewController.m; sourceTree = "<group>"; };
 		AA790FC818B94FA500FF08CB /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		AA93416F18C327EE00B32C22 /* PKSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSplitViewController.h; sourceTree = "<group>"; };
+		AA93417018C327EE00B32C22 /* PKSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSplitViewController.m; sourceTree = "<group>"; };
+		AA93417218C32F5E00B32C22 /* PKThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKThumbnailCell.h; sourceTree = "<group>"; };
+		AA93417318C32F5E00B32C22 /* PKThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKThumbnailCell.m; sourceTree = "<group>"; };
 		AAAD8A6B18B7D2C500FEB115 /* PKPeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPeakViewController.h; sourceTree = "<group>"; };
 		AAAD8A6C18B7D2C500FEB115 /* PKPeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPeakViewController.m; sourceTree = "<group>"; };
 		AAAD8A7118B800F500FEB115 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
@@ -180,6 +192,14 @@
 				AAAD8A7218B800F600FEB115 /* Path.m */,
 				AAAD8A7918B864B200FEB115 /* Peak.h */,
 				AAAD8A7A18B864B200FEB115 /* Peak.m */,
+				AA27197A18C2DFF200E3767A /* PKPageViewController.h */,
+				AA27197B18C2DFF200E3767A /* PKPageViewController.m */,
+				AA27197D18C2FC7400E3767A /* PKPeakPageViewController.h */,
+				AA27197E18C2FC7400E3767A /* PKPeakPageViewController.m */,
+				AA93416F18C327EE00B32C22 /* PKSplitViewController.h */,
+				AA93417018C327EE00B32C22 /* PKSplitViewController.m */,
+				AA93417218C32F5E00B32C22 /* PKThumbnailCell.h */,
+				AA93417318C32F5E00B32C22 /* PKThumbnailCell.m */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
@@ -350,6 +370,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA93417118C327EE00B32C22 /* PKSplitViewController.m in Sources */,
+				AA27197C18C2DFF200E3767A /* PKPageViewController.m in Sources */,
 				631E6E81188D00E200823A3E /* Paths.xcdatamodeld in Sources */,
 				631EB0CF188FBB950016C4CB /* PKPhotoTableViewCell.m in Sources */,
 				AAAD8A7318B800F600FEB115 /* Path.m in Sources */,
@@ -359,7 +381,9 @@
 				631E6E74188D00E200823A3E /* main.m in Sources */,
 				631E6E78188D00E200823A3E /* PKAppDelegate.m in Sources */,
 				631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */,
+				AA93417418C32F5E00B32C22 /* PKThumbnailCell.m in Sources */,
 				AAAD8A6D18B7D2C500FEB115 /* PKPeakViewController.m in Sources */,
+				AA27197F18C2FC7400E3767A /* PKPeakPageViewController.m in Sources */,
 				630C1908189472D6003818E5 /* PKPathMarkerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
