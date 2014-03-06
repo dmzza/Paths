@@ -21,6 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.mapView = [[MKMapView alloc] init];
+        [self.mapView setUserTrackingMode:MKUserTrackingModeFollow];
     }
     return self;
 }
@@ -35,9 +37,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.mapView setTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]]; //hdj50i76"]];
+    /*[self.mapView setTileSource:[[RMMapboxSource alloc] initWithMapID:@"dmzza.h26oci6o"]]; //hdj50i76"]];
     [self.mapView setTileSourcesZoom:16.0];
-    [self.mapView setUserTrackingMode:RMUserTrackingModeFollow];
+    [self.mapView setUserTrackingMode:RMUserTrackingModeFollow];*/
 }
 
 - (void)didReceiveMemoryWarning

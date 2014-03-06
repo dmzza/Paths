@@ -38,12 +38,19 @@
     PKMasterViewController *masterViewController = (PKMasterViewController *)self.childViewControllers[0];
     
     masterViewController.managedObjectContext = self.managedObjectContext;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 @end

@@ -67,7 +67,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedPeaksController sections][section];
-    return [sectionInfo numberOfObjects] + 1;
+    return [sectionInfo numberOfObjects] + 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

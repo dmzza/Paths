@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MapBox/Mapbox.h>
+#import <MapKit/MapKit.h>
 
 @interface PKPeakPageViewController : UIViewController <RMMapViewDelegate>
 
 @property NSManagedObjectContext *managedObjectContect;
 
 @property (strong, nonatomic) IBOutlet UIImageView *featureImageView;
-@property (strong, nonatomic) IBOutlet RMMapView *mapView;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
