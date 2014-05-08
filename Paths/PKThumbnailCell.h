@@ -10,6 +10,7 @@
 
 @interface PKThumbnailCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *photo;
+@property (strong, nonatomic) IBOutlet UILabel *headline;
 
 @end
