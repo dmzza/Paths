@@ -22,6 +22,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
         self.preferredContentSize = CGSizeMake(320.0, 600.0);
+        
     }
     [super awakeFromNib];
 }
@@ -29,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.library = [[ALAssetsLibrary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,13 +63,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedPeaksController sections] count];
+    //return [[self.fetchedPeaksController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedPeaksController sections][section];
-    return [sectionInfo numberOfObjects] + 5;
+    //id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedPeaksController sections][section];
+    //return [sectionInfo numberOfObjects] + 5;
+    if (self.cameraRoll == nil) {
+        return 0;
+    }
+    return self.cameraRoll.numberOfAssets;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -214,6 +221,33 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - Grouped Assets
+
+- (ALAssetsGroup *)cameraRoll
+{
+    if (_cameraRoll != nil) {
+        return _cameraRoll;
+    }
+    
+    __weak PKMasterViewController* weakSelf = self;
+    
+    [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        //weakSelf.cameraRoll = group;
+        if (group != nil) {
+            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+            _cameraRoll = group;
+            NSLog(@"found saved photos %@", [group description]);
+            [weakSelf.tableView reloadData];
+        }
+        
+        //
+    } failureBlock:^(NSError *error) {
+        NSLog(@"denied access to photos");
+    }];
+    
+    return nil;
+}
+
 /*
 // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
 
@@ -227,8 +261,36 @@
 - (void)configureCell:(PKThumbnailCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //NSManagedObject *object = [self.fetchedPeaksController objectAtIndexPath:indexPath];
-    cell.photo.image = [UIImage imageNamed:@"jog.png"];
-    cell.headline.text = @"Headline";
+    [self.cameraRoll enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:self.cameraRoll.numberOfAssets - 1 - indexPath.row] options:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        if (result != nil) {
+            ALAssetRepresentation *represenation = [result defaultRepresentation];
+            NSLog(@"photo: %@", represenation.metadata);
+            NSDictionary *locationData = [represenation.metadata objectForKey:@"{GPS}"];
+            CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
+            if (location != nil) { //locationData != nil) {
+                NSLog(@"%f", [(NSString *)[locationData objectForKey:@"Longitude"] doubleValue]);
+                /* CLLocationCoordinate2D center = CLLocationCoordinate2DMake(
+                                                                           [(NSString *)[locationData objectForKey:@"Latitude"] doubleValue],
+                                                                           [(NSString *)[locationData objectForKey:@"Longitude"] doubleValue] * -1
+                                                                           );*/
+                CLLocationCoordinate2D center = [location coordinate];
+                MKCoordinateSpan zoom = MKCoordinateSpanMake(0.02, 0.02);
+                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+                [annotation setCoordinate:center];
+                //MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+                
+                [cell.map setHidden:NO];
+                [cell.map setRegion:MKCoordinateRegionMake(center, zoom)];
+                [cell.map removeAnnotations:cell.map.annotations];
+                [cell.map addAnnotation:annotation];
+                
+            } else {
+                [cell.map setHidden:YES];
+            }
+            [cell.photo setImage:[UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]]];
+        }
+    }];
+    cell.headline.text = @"";
 }
 
 @end

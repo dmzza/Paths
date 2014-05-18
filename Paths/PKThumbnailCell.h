@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface PKThumbnailCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *photo;
 @property (strong, nonatomic) IBOutlet UILabel *headline;
+@property (strong, nonatomic) IBOutlet MKMapView *map;
 
 @end
