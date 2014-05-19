@@ -74,7 +74,7 @@
     if (self.cameraRoll == nil) {
         return 0;
     }
-    return self.cameraRoll.numberOfAssets;
+    return self.cameraRoll.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -223,24 +223,46 @@
 
 #pragma mark - Grouped Assets
 
-- (ALAssetsGroup *)cameraRoll
+- (NSMutableArray *)cameraRoll
 {
     if (_cameraRoll != nil) {
         return _cameraRoll;
     }
     
     __weak PKMasterViewController* weakSelf = self;
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
     
     [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        //weakSelf.cameraRoll = group;
         if (group != nil) {
             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-            _cameraRoll = group;
+            //_cameraRoll = group;
             NSLog(@"found saved photos %@", [group description]);
-            [weakSelf.tableView reloadData];
+            
+            
+            
+            
+            
+            [group enumerateAssetsWithOptions:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                if (result != nil) {
+                    
+                    //NSLog(@"photo: %@", represenation.metadata);
+                    CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
+                    if (location != nil) {
+                        NSLog(@"photo %d", photos.count);
+                        NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
+                        NSDictionary *photo = @{@"date": dateTaken, @"location": location, @"asset": result};
+                        
+                        [photos addObject:photo];
+                    }
+                    
+                } else {
+                    _cameraRoll = photos;
+                    NSLog(@"%d", photos.count);
+                    [weakSelf.tableView reloadData];
+                }
+            }];
+            
         }
-        
-        //
     } failureBlock:^(NSError *error) {
         NSLog(@"denied access to photos");
     }];
@@ -261,36 +283,19 @@
 - (void)configureCell:(PKThumbnailCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //NSManagedObject *object = [self.fetchedPeaksController objectAtIndexPath:indexPath];
-    [self.cameraRoll enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:self.cameraRoll.numberOfAssets - 1 - indexPath.row] options:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        if (result != nil) {
-            ALAssetRepresentation *represenation = [result defaultRepresentation];
-            NSLog(@"photo: %@", represenation.metadata);
-            NSDictionary *locationData = [represenation.metadata objectForKey:@"{GPS}"];
-            CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
-            if (location != nil) { //locationData != nil) {
-                NSLog(@"%f", [(NSString *)[locationData objectForKey:@"Longitude"] doubleValue]);
-                /* CLLocationCoordinate2D center = CLLocationCoordinate2DMake(
-                                                                           [(NSString *)[locationData objectForKey:@"Latitude"] doubleValue],
-                                                                           [(NSString *)[locationData objectForKey:@"Longitude"] doubleValue] * -1
-                                                                           );*/
-                CLLocationCoordinate2D center = [location coordinate];
-                MKCoordinateSpan zoom = MKCoordinateSpanMake(0.02, 0.02);
-                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-                [annotation setCoordinate:center];
-                //MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
-                
-                [cell.map setHidden:NO];
-                [cell.map setRegion:MKCoordinateRegionMake(center, zoom)];
-                [cell.map removeAnnotations:cell.map.annotations];
-                [cell.map addAnnotation:annotation];
-                
-            } else {
-                [cell.map setHidden:YES];
-            }
-            [cell.photo setImage:[UIImage imageWithCGImage:[represenation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[represenation orientation]]];
-        }
-    }];
+    NSDictionary *photo = [self.cameraRoll objectAtIndex:indexPath.row];
+    CLLocationCoordinate2D center = [(CLLocation *)[photo objectForKey:@"location"] coordinate];
+    MKCoordinateSpan zoom = MKCoordinateSpanMake(0.02, 0.02);
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    ALAssetRepresentation *representation = [(ALAsset *)[photo objectForKey:@"asset"] defaultRepresentation];
+    
+    [annotation setCoordinate:center];
+    [cell.map setRegion:MKCoordinateRegionMake(center, zoom)];
+    [cell.map removeAnnotations:cell.map.annotations];
+    [cell.map addAnnotation:annotation];
+    [cell.date setText:[(NSDate *)[photo objectForKey:@"date"] description]];
     cell.headline.text = @"";
+    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]]];
 }
 
 @end

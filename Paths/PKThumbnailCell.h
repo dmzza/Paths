@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *photo;
 @property (strong, nonatomic) IBOutlet UILabel *headline;
+@property (strong, nonatomic) IBOutlet UILabel *date;
 @property (strong, nonatomic) IBOutlet MKMapView *map;
 
 @end

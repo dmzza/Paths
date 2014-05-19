@@ -65,6 +65,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="date" destination="nTl-VG-rlH" id="rPG-13-XVe"/>
                                     <outlet property="headline" destination="3Yp-gD-puI" id="3YO-ZO-qS7"/>
                                     <outlet property="map" destination="CkX-Fm-JVX" id="x5e-HL-zJN"/>
                                     <outlet property="photo" destination="feF-Sk-rnC" id="8Mr-J3-o99"/>

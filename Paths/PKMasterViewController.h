@@ -20,6 +20,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-@property (strong, nonatomic) ALAssetsGroup *cameraRoll;
+@property (strong, nonatomic) NSMutableArray *cameraRoll;
 
 @end
