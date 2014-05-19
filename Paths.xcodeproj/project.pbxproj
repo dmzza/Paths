@@ -41,6 +41,7 @@
 		AAAD8A7318B800F600FEB115 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7218B800F600FEB115 /* Path.m */; };
 		AAAD8A7518B863D800FEB115 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAD8A7418B863D800FEB115 /* CoreLocation.framework */; };
 		AAAD8A7B18B864B200FEB115 /* Peak.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAD8A7A18B864B200FEB115 /* Peak.m */; };
+		AAFD27C1192A6C3F00D75875 /* PKMapHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFD27C0192A6C3F00D75875 /* PKMapHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,8 @@
 		AAAD8A7418B863D800FEB115 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AAAD8A7918B864B200FEB115 /* Peak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peak.h; path = ../Peak.h; sourceTree = "<group>"; };
 		AAAD8A7A18B864B200FEB115 /* Peak.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peak.m; path = ../Peak.m; sourceTree = "<group>"; };
+		AAFD27BF192A6C3F00D75875 /* PKMapHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapHeaderView.h; sourceTree = "<group>"; };
+		AAFD27C0192A6C3F00D75875 /* PKMapHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +213,8 @@
 				63A5C98E18D69463003B9A31 /* PKCityViewController.m */,
 				63A5C99018D6948B003B9A31 /* PKCityTableViewCell.h */,
 				63A5C99118D6948B003B9A31 /* PKCityTableViewCell.m */,
+				AAFD27BF192A6C3F00D75875 /* PKMapHeaderView.h */,
+				AAFD27C0192A6C3F00D75875 /* PKMapHeaderView.m */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				AAAD8A7B18B864B200FEB115 /* Peak.m in Sources */,
 				631E6E84188D00E200823A3E /* PKMasterViewController.m in Sources */,
 				631E6E87188D00E200823A3E /* PKDetailViewController.m in Sources */,
+				AAFD27C1192A6C3F00D75875 /* PKMapHeaderView.m in Sources */,
 				631E6E74188D00E200823A3E /* main.m in Sources */,
 				631E6E78188D00E200823A3E /* PKAppDelegate.m in Sources */,
 				631EB0D2188FEE130016C4CB /* PKMapTableViewCell.m in Sources */,

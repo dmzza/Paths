@@ -10,6 +10,7 @@
 
 #import "PKPageViewController.h"
 #import "PKThumbnailCell.h"
+#import "PKMapHeaderView.h"
 
 @interface PKMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -31,6 +32,7 @@
 {
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
+    [self.tableView registerClass:[PKMapHeaderView class] forHeaderFooterViewReuseIdentifier:@"mapHeader"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +66,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     //return [[self.fetchedPeaksController sections] count];
-    return 1;
+    if (self.cameraRoll == nil) {
+        return 0;
+    }
+    return [self.cameraRoll count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,7 +79,39 @@
     if (self.cameraRoll == nil) {
         return 0;
     }
-    return self.cameraRoll.count;
+    return [[self.cameraRoll objectAtIndex:section] count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    PKMapHeaderView *header = (PKMapHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"mapHeader"];
+    
+    NSMutableArray *photos = (NSMutableArray *)[self.cameraRoll objectAtIndex:section];
+    NSDictionary *firstPhoto = [photos objectAtIndex:0];
+    CLLocationCoordinate2D center = [(CLLocation *)[firstPhoto objectForKey:@"location"] coordinate];
+    double loLat, hiLat, loLon, hiLon;
+    
+    loLat = hiLat = center.latitude;
+    loLon = hiLon = center.longitude;
+    [header.map removeAnnotations:header.map.annotations];
+    [header.date setText:(NSString *)[firstPhoto objectForKey:@"date"]];
+    
+    for (NSDictionary *photo in photos) {
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        CLLocationCoordinate2D center = [(CLLocation *)[photo objectForKey:@"location"] coordinate];
+        
+        loLat = MIN(loLat, center.latitude);
+        hiLat = MAX(hiLat, center.latitude);
+        loLon = MIN(loLon, center.longitude);
+        hiLon = MAX(hiLon, center.longitude);
+        [annotation setCoordinate:center];
+        [header.map addAnnotation:annotation];
+    }
+    
+    MKCoordinateSpan zoom = MKCoordinateSpanMake((hiLat - loLat) * 2, (hiLon - loLon) * 1.2);
+    center = CLLocationCoordinate2DMake((hiLat + loLat) / 2, (hiLon + loLon) / 2);
+    [header.map setRegion:MKCoordinateRegionMake(center, zoom)];
+    
+    return header;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -230,7 +267,7 @@
     }
     
     __weak PKMasterViewController* weakSelf = self;
-    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    NSMutableArray *days = [[NSMutableArray alloc] init];
     
     [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if (group != nil) {
@@ -248,18 +285,26 @@
                     //NSLog(@"photo: %@", represenation.metadata);
                     CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
                     if (location != nil) {
-                        NSLog(@"photo %d", photos.count);
+                        NSLog(@"photo");
                         ALAssetRepresentation *representation = [result defaultRepresentation];
                         //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
                         NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
-                        NSDictionary *photo = @{@"date": dateTaken, @"location": location, @"asset": result, @"representation": representation};
+                        //NSDateFormatter *formatter = [NSDateFormatter dateFormatFromTemplate:@"yMMMMd" options:0 locale:[NSLocale currentLocale]];
+                        NSString *formattedDate = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
+                        NSDictionary *photo = @{@"date": formattedDate, @"location": location, @"asset": result, @"representation": representation};
                         
-                        [photos addObject:photo];
+                        if (days.count == 0 || ![[(NSDictionary *)[(NSMutableArray *)days.lastObject firstObject] objectForKey:@"date"] isEqualToString:formattedDate]) {
+                            NSMutableArray *photos = [[NSMutableArray alloc] init];
+                            [photos addObject:photo];
+                            [days addObject:photos];
+                        } else {
+                            [(NSMutableArray *)days.lastObject addObject:photo];
+                        }
                     }
                     
                 } else {
-                    _cameraRoll = photos;
-                    NSLog(@"%d", photos.count);
+                    _cameraRoll = days;
+                    NSLog(@"days: %d", days.count);
                     [weakSelf.tableView reloadData];
                 }
             }];
@@ -285,19 +330,11 @@
 - (void)configureCell:(PKThumbnailCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //NSManagedObject *object = [self.fetchedPeaksController objectAtIndexPath:indexPath];
-    NSDictionary *photo = [self.cameraRoll objectAtIndex:indexPath.row];
-    CLLocationCoordinate2D center = [(CLLocation *)[photo objectForKey:@"location"] coordinate];
-    MKCoordinateSpan zoom = MKCoordinateSpanMake(0.02, 0.02);
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     ALAssetRepresentation *representation = (ALAssetRepresentation *)[photo objectForKey:@"representation"];
     
-    [annotation setCoordinate:center];
-    [cell.map setRegion:MKCoordinateRegionMake(center, zoom)];
-    [cell.map removeAnnotations:cell.map.annotations];
-    [cell.map addAnnotation:annotation];
-    [cell.date setText:[(NSDate *)[photo objectForKey:@"date"] description]];
     cell.headline.text = @"";
-    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]]];
+    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp]]; // (UIImageOrientation)[representation orientation]]];
     //[cell.photo setImage:(UIImage *)[photo objectForKey:@"image"]];
 }
 
