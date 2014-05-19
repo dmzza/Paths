@@ -249,8 +249,10 @@
                     CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
                     if (location != nil) {
                         NSLog(@"photo %d", photos.count);
+                        ALAssetRepresentation *representation = [result defaultRepresentation];
+                        //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
                         NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
-                        NSDictionary *photo = @{@"date": dateTaken, @"location": location, @"asset": result};
+                        NSDictionary *photo = @{@"date": dateTaken, @"location": location, @"asset": result, @"representation": representation};
                         
                         [photos addObject:photo];
                     }
@@ -287,7 +289,7 @@
     CLLocationCoordinate2D center = [(CLLocation *)[photo objectForKey:@"location"] coordinate];
     MKCoordinateSpan zoom = MKCoordinateSpanMake(0.02, 0.02);
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    ALAssetRepresentation *representation = [(ALAsset *)[photo objectForKey:@"asset"] defaultRepresentation];
+    ALAssetRepresentation *representation = (ALAssetRepresentation *)[photo objectForKey:@"representation"];
     
     [annotation setCoordinate:center];
     [cell.map setRegion:MKCoordinateRegionMake(center, zoom)];
@@ -295,7 +297,8 @@
     [cell.map addAnnotation:annotation];
     [cell.date setText:[(NSDate *)[photo objectForKey:@"date"] description]];
     cell.headline.text = @"";
-    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullResolutionImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]]];
+    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]]];
+    //[cell.photo setImage:(UIImage *)[photo objectForKey:@"image"]];
 }
 
 @end
