@@ -33,6 +33,7 @@
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
     [self.tableView registerClass:[PKMapHeaderView class] forHeaderFooterViewReuseIdentifier:@"mapHeader"];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,6 +111,7 @@
     MKCoordinateSpan zoom = MKCoordinateSpanMake((hiLat - loLat) * 2, (hiLon - loLon) * 1.2);
     center = CLLocationCoordinate2DMake((hiLat + loLat) / 2, (hiLon + loLon) / 2);
     [header.map setRegion:MKCoordinateRegionMake(center, zoom)];
+    [header.contentView setBackgroundColor:[[self.navigationController navigationBar] barTintColor]];
     
     return header;
 }
@@ -333,7 +335,7 @@
     NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     ALAssetRepresentation *representation = (ALAssetRepresentation *)[photo objectForKey:@"representation"];
     
-    cell.headline.text = @"";
+    //cell.headline.text = @"";
     [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp]]; // (UIImageOrientation)[representation orientation]]];
     //[cell.photo setImage:(UIImage *)[photo objectForKey:@"image"]];
 }

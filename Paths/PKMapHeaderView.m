@@ -23,8 +23,8 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self)
     {
-        self.map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, 116)];
-        self.date = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, 280, 20)];
+        self.map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 3, 320, 117)];
+        self.date = [[UILabel alloc] initWithFrame:CGRectMake(10, 125, 300, 20)];
         [self.map setUserInteractionEnabled:NO];
         [self.date setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f]];
         [self.date setTextAlignment:NSTextAlignmentRight];
