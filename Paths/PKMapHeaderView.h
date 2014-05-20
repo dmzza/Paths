@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) MKMapView *map;
 @property (strong, nonatomic) UILabel *date;
+@property (strong, nonatomic) UILabel *distance;
 
 @end

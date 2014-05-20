@@ -89,7 +89,8 @@
     NSMutableArray *photos = (NSMutableArray *)[self.cameraRoll objectAtIndex:section];
     NSDictionary *firstPhoto = [photos objectAtIndex:0];
     CLLocationCoordinate2D center = [(CLLocation *)[firstPhoto objectForKey:@"location"] coordinate];
-    double loLat, hiLat, loLon, hiLon;
+    CLLocationCoordinate2D lastCenter = center;
+    double loLat, hiLat, loLon, hiLon, distance = 0.0;
     
     loLat = hiLat = center.latitude;
     loLon = hiLon = center.longitude;
@@ -104,13 +105,16 @@
         hiLat = MAX(hiLat, center.latitude);
         loLon = MIN(loLon, center.longitude);
         hiLon = MAX(hiLon, center.longitude);
+        distance += [[[CLLocation alloc] initWithLatitude:center.latitude longitude:center.longitude] distanceFromLocation:[[CLLocation alloc] initWithLatitude:lastCenter.latitude longitude:lastCenter.longitude]];
         [annotation setCoordinate:center];
         [header.map addAnnotation:annotation];
+        lastCenter = center;
     }
     
     MKCoordinateSpan zoom = MKCoordinateSpanMake((hiLat - loLat) * 2, (hiLon - loLon) * 1.2);
     center = CLLocationCoordinate2DMake((hiLat + loLat) / 2, (hiLon + loLon) / 2);
     [header.map setRegion:MKCoordinateRegionMake(center, zoom)];
+    [header.distance setText:[NSString stringWithFormat:@"%.0f miles", distance * 0.000621371]];
     [header.contentView setBackgroundColor:[[self.navigationController navigationBar] barTintColor]];
     
     return header;
