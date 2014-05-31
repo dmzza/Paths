@@ -80,13 +80,13 @@
     if (self.cameraRoll == nil) {
         return 0;
     }
-    return [[self.cameraRoll objectAtIndex:section] count];
+    return [[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - section] count];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     PKMapHeaderView *header = (PKMapHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"mapHeader"];
     
-    NSMutableArray *photos = (NSMutableArray *)[self.cameraRoll objectAtIndex:section];
+    NSMutableArray *photos = (NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - section];
     NSDictionary *firstPhoto = [photos objectAtIndex:0];
     CLLocationCoordinate2D center = [(CLLocation *)[firstPhoto objectForKey:@"location"] coordinate];
     CLLocationCoordinate2D lastCenter = center;
@@ -114,7 +114,7 @@
     MKCoordinateSpan zoom = MKCoordinateSpanMake((hiLat - loLat) * 2, (hiLon - loLon) * 1.2);
     center = CLLocationCoordinate2DMake((hiLat + loLat) / 2, (hiLon + loLon) / 2);
     [header.map setRegion:MKCoordinateRegionMake(center, zoom)];
-    [header.distance setText:[NSString stringWithFormat:@"%.0f miles", distance * 0.000621371]];
+    [header.distance setText:[[NSString stringWithFormat:@"%.0f miles", distance * 0.000621371] uppercaseString]];
     [header.contentView setBackgroundColor:[[self.navigationController navigationBar] barTintColor]];
     
     return header;
@@ -336,7 +336,7 @@
 - (void)configureCell:(PKThumbnailCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //NSManagedObject *object = [self.fetchedPeaksController objectAtIndexPath:indexPath];
-    NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - indexPath.section] objectAtIndex:indexPath.row];
     ALAssetRepresentation *representation = (ALAssetRepresentation *)[photo objectForKey:@"representation"];
     
     //cell.headline.text = @"";

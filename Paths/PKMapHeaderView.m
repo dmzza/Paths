@@ -24,10 +24,11 @@
     if (self)
     {
         self.map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 3, 320, 117)];
-        self.date = [[UILabel alloc] initWithFrame:CGRectMake(10, 125, 300, 20)];
-        self.distance = [[UILabel alloc] initWithFrame:CGRectMake(10, 125, 300, 20)];
+        self.date = [[UILabel alloc] initWithFrame:CGRectMake(10, 129, 300, 20)];
+        self.distance = [[UILabel alloc] initWithFrame:CGRectMake(10, 130, 300, 20)];
         [self.map setUserInteractionEnabled:NO];
-        self.date.font = self.distance.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f];
+        self.date.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f];
+        self.distance.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f];
         self.date.alpha = self.distance.alpha = 0.4;
         [self.date setTextAlignment:NSTextAlignmentRight];
         [self.distance setTextAlignment:NSTextAlignmentLeft];
