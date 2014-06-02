@@ -13,11 +13,12 @@
 
 #import <CoreData/CoreData.h>
 
-@interface PKMasterViewController : UITableViewController// <NSFetchedResultsControllerDelegate>
+@interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) PKPageViewController *detailViewController;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedPathsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) ALAssetsLibrary *library;
 @property (strong, nonatomic) NSMutableArray *cameraRoll;

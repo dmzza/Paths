@@ -11,6 +11,8 @@
 #import "PKPageViewController.h"
 #import "PKThumbnailCell.h"
 #import "PKMapHeaderView.h"
+#import "Path.h"
+#import "Peak.h"
 
 @interface PKMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -214,6 +216,42 @@
     return _fetchedPeaksController;
 }
 
+- (NSFetchedResultsController *)fetchedPathsController {
+    if (_fetchedPeaksController != nil) {
+        return _fetchedPeaksController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Path" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    //NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"longitude" ascending:NO];
+    //NSArray *sortDescriptors = @[sortDescriptor];
+    
+    //[fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedPathsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Paths"];
+    aFetchedPathsController.delegate = self;
+    self.fetchedPathsController = aFetchedPathsController;
+    
+	NSError *error = nil;
+	if (![self.fetchedPeaksController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	    abort();
+	}
+    
+    return _fetchedPeaksController;
+}
+
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
@@ -287,11 +325,12 @@
             
             [group enumerateAssetsWithOptions:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 if (result != nil) {
-                    
+                    Path *dayPath;
                     //NSLog(@"photo: %@", represenation.metadata);
                     CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
                     if (location != nil) {
                         NSLog(@"photo");
+                        
                         ALAssetRepresentation *representation = [result defaultRepresentation];
                         //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
                         NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
@@ -299,12 +338,64 @@
                         NSString *formattedDate = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
                         NSDictionary *photo = @{@"date": formattedDate, @"location": location, @"asset": result, @"representation": representation};
                         
+                        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+                        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Path" inManagedObjectContext:self.managedObjectContext];
+                        [fetchRequest setEntity:entity];
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"WHERE `name` is ?" argumentArray:@[formattedDate]];
+                        [fetchRequest setPredicate:predicate];
+                        
+                        NSFetchedResultsController *fetchedPathsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"Path%@", formattedDate]];
+                        
+                        NSError *error = nil;
+                        if (![fetchedPathsController performFetch:&error]) {
+                            // Replace this implementation with code to handle the error appropriately.
+                            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                            abort();
+                        }
+                        
+                        NSManagedObjectContext *context = [fetchedPathsController managedObjectContext];
+                        if ([[fetchedPathsController fetchedObjects] count] < 1) {
+                            NSManagedObject *newPath = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+                            
+                            // If appropriate, configure the new managed object.
+                            // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+                            //[newPath setValue:formattedDate forKey:@"date"];
+                            [newPath setValue:formattedDate forKey:@"name"];
+                            
+                            // Save the context.
+                            NSError *error = nil;
+                            if (![context save:&error]) {
+                                // Replace this implementation with code to handle the error appropriately.
+                                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                                abort();
+                            }
+                        }
+                        
+                        dayPath = (Path *)[[fetchedPathsController fetchedObjects] firstObject];
+                        
                         if (days.count == 0 || ![[(NSDictionary *)[(NSMutableArray *)days.lastObject firstObject] objectForKey:@"date"] isEqualToString:formattedDate]) {
                             NSMutableArray *photos = [[NSMutableArray alloc] init];
                             [photos addObject:photo];
                             [days addObject:photos];
+                            
                         } else {
                             [(NSMutableArray *)days.lastObject addObject:photo];
+                        }
+                        
+                        Peak *newPeak = [[Peak alloc] init];
+                        [newPeak setPhoto:representation.url.path];
+                        [newPeak setLongitude:location.coordinate.longitude];
+                        [newPeak setLatitude:location.coordinate.latitude];
+                        [dayPath addPeaksObject:newPeak];
+                        
+                        // Save the context.
+                        if (![context save:&error]) {
+                            // Replace this implementation with code to handle the error appropriately.
+                            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                            abort();
                         }
                     }
                     
@@ -335,9 +426,10 @@
 
 - (void)configureCell:(PKThumbnailCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    //NSManagedObject *object = [self.fetchedPeaksController objectAtIndexPath:indexPath];
-    NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - indexPath.section] objectAtIndex:indexPath.row];
-    ALAssetRepresentation *representation = (ALAssetRepresentation *)[photo objectForKey:@"representation"];
+    Path *path = [self.fetchedPathsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.section inSection:0]];
+    Peak *peak = [path.peaks anyObject];
+    //NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - indexPath.section] objectAtIndex:indexPath.row];
+    ALAssetRepresentation *representation = [ALAssetRepresentation alloc] ini;
     
     //cell.headline.text = @"";
     [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp]]; // (UIImageOrientation)[representation orientation]]];
