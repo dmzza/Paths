@@ -87,6 +87,7 @@
 		631EB0CE188FBB950016C4CB /* PKPhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPhotoTableViewCell.m; sourceTree = "<group>"; };
 		631EB0D0188FEE130016C4CB /* PKMapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMapTableViewCell.h; sourceTree = "<group>"; };
 		631EB0D1188FEE130016C4CB /* PKMapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMapTableViewCell.m; sourceTree = "<group>"; };
+		63693D78193EDA3A00402A05 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		63A5C98D18D69463003B9A31 /* PKCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCityViewController.h; sourceTree = "<group>"; };
 		63A5C98E18D69463003B9A31 /* PKCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCityViewController.m; sourceTree = "<group>"; };
 		63A5C99018D6948B003B9A31 /* PKCityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCityTableViewCell.h; sourceTree = "<group>"; };
@@ -215,6 +216,7 @@
 				63A5C99118D6948B003B9A31 /* PKCityTableViewCell.m */,
 				AAFD27BF192A6C3F00D75875 /* PKMapHeaderView.h */,
 				AAFD27C0192A6C3F00D75875 /* PKMapHeaderView.m */,
+				63693D78193EDA3A00402A05 /* MyPlayground.playground */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
