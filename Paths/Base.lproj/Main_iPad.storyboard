@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="bca-8s-aFD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bca-8s-aFD">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="4vb-Ye-WqK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yK7-u0-4iv">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CF2-lU-Aii" userLabel="Master">
@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GN-Ln-nUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-622" y="-630"/>
+            <point key="canvasLocation" x="-388.75" y="-295.3125"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="E5o-C1-yEC">
@@ -52,7 +52,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="ATE-bu-MHT" customClass="PKPageViewController" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyZ-26-ZH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-423" y="239"/>
+            <point key="canvasLocation" x="-264.375" y="112.03125"/>
         </scene>
         <!--Peak Page View Controller-->
         <scene sceneID="5dm-D1-Jgn">
@@ -102,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9L-Di-AS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811" y="-630"/>
+            <point key="canvasLocation" x="506.875" y="-295.3125"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="UXb-dd-YaB">
@@ -113,7 +113,7 @@
                         <viewControllerLayoutGuide type="bottom" id="osG-ZP-UEs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Uhn-7n-M5B">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-KF-ZQK">
@@ -128,14 +128,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4d6-Ph-LiA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="-1644"/>
+            <point key="canvasLocation" x="386.25" y="-770.625"/>
         </scene>
         <!--City View Controller - Root View Controller-->
         <scene sceneID="TdP-pg-ehI">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="9HF-D7-7d5" customClass="PKCityViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" id="Frz-ID-Q1O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -174,7 +174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dew-jQ-WYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="-2557"/>
+            <point key="canvasLocation" x="718.75" y="-1198.59375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2jn-2G-08p">
@@ -190,7 +190,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cPc-AO-PWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="-2558"/>
+            <point key="canvasLocation" x="386.25" y="-1199.0625"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Gqu-Tg-9nh">
@@ -205,7 +205,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dp0-C0-Ksj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-622" y="-2115"/>
+            <point key="canvasLocation" x="-388.75" y="-991.40625"/>
         </scene>
         <!--Master View Controller - Master-->
         <scene sceneID="smW-Zh-WAh">
@@ -248,12 +248,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="-630"/>
+            <point key="canvasLocation" x="320" y="-295.3125"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
