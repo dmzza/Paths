@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, PKDirection) {
 @interface PKDetailViewController : UIViewController <NSFetchedResultsControllerDelegate, PKPeakViewControllerDelegate, RMMapViewDelegate, UIDynamicAnimatorDelegate>
 
 @property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) NSArray *photos;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

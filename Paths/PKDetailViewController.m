@@ -114,12 +114,14 @@
     }
     
     [self.mapView removeAllAnnotations];
-    for (NSManagedObject *p in [self.fetchedPeaksController fetchedObjects]) {
-        Peak *peak = (Peak *)p;
-        RMPointAnnotation *pin = [RMPointAnnotation annotationWithMapView:self.mapView coordinate:CLLocationCoordinate2DMake(peak.latitude, peak.longitude) andTitle:peak.street];
+    //for (NSManagedObject *p in [self.fetchedPeaksController fetchedObjects]) {
+    for (NSDictionary *photo in self.photos) {
+        //Peak *peak = (Peak *)p;
+        CLLocationCoordinate2D center = [(CLLocation *)[photo objectForKey:@"location"] coordinate];
+        RMPointAnnotation *pin = [RMPointAnnotation annotationWithMapView:self.mapView coordinate:CLLocationCoordinate2DMake(center.latitude, center.longitude) andTitle:[photo objectForKey:@"date"]];
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         
-        [library assetForURL:[NSURL URLWithString:peak.photo] resultBlock:^(ALAsset *asset) {
+        /*[library assetForURL:[NSURL URLWithString:[photo objectForKey:@"photo"]] resultBlock:^(ALAsset *asset) {
             
             ALAssetRepresentation *represenation = [asset defaultRepresentation];
             
@@ -129,7 +131,7 @@
             
         } failureBlock:^(NSError *error) {
             // TODO
-        }];
+        }];*/
         
         
         

@@ -14,5 +14,7 @@
 @property (strong, nonatomic) MKMapView *map;
 @property (strong, nonatomic) UILabel *date;
 @property (strong, nonatomic) UILabel *distance;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
+@property (nonatomic) NSInteger section;
 
 @end

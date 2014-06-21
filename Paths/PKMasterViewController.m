@@ -118,6 +118,9 @@
     [header.map setRegion:MKCoordinateRegionMake(center, zoom)];
     [header.distance setText:[[NSString stringWithFormat:@"%.0f miles", distance * 0.000621371] uppercaseString]];
     [header.contentView setBackgroundColor:[[self.navigationController navigationBar] barTintColor]];
+    header.section = section;
+    
+    [header.tapRecognizer addTarget:self action:@selector(didSelectSectionHeader:) ];
     
     return header;
 }
@@ -165,6 +168,15 @@
         //TODO
         //self.detailViewController.detailItem = object;
     }
+}
+
+- (void)didSelectSectionHeader:(UITapGestureRecognizer *)recognizer
+{
+    PKMapHeaderView *view = (PKMapHeaderView *)recognizer.view;
+    NSMutableArray *photos = (NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - view.section];
+    
+    self.detailViewController.photos = [NSArray arrayWithArray:photos];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -429,10 +441,12 @@
     Path *path = [self.fetchedPathsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.section inSection:0]];
     Peak *peak = [path.peaks anyObject];
     //NSDictionary *photo = [(NSMutableArray *)[self.cameraRoll objectAtIndex:self.cameraRoll.count - 1 - indexPath.section] objectAtIndex:indexPath.row];
-    ALAssetRepresentation *representation = [ALAssetRepresentation alloc] ini;
+    //ALAssetRepresentation *representation = [[ALAssetRepresentation alloc] init];
+    //[representation ]
+    
     
     //cell.headline.text = @"";
-    [cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp]]; // (UIImageOrientation)[representation orientation]]];
+    //[cell.photo setImage:[UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp]]; // (UIImageOrientation)[representation orientation]]];
     //[cell.photo setImage:(UIImage *)[photo objectForKey:@"image"]];
 }
 

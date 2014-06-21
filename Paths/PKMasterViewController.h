@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "PKDetailViewController.h"
 
 @class PKPageViewController;
 
@@ -15,7 +16,7 @@
 
 @interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) PKPageViewController *detailViewController;
+@property (strong, nonatomic) PKDetailViewController *detailViewController;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPeaksController;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedPathsController;

@@ -35,6 +35,8 @@
         [self.contentView addSubview:self.map];
         [self.contentView addSubview:self.date];
         [self.contentView addSubview:self.distance];
+        self.tapRecognizer = [[UITapGestureRecognizer alloc] init];
+        [self addGestureRecognizer:self.tapRecognizer];
     }
     return self;
 }
