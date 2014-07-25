@@ -10,4 +10,7 @@
 
 @interface PKGroupCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *bestImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
 @end

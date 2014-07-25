@@ -27,6 +27,7 @@
 		638F3992198201CF00E99818 /* Shot_RocketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 638F3991198201CF00E99818 /* Shot_RocketTests.m */; };
 		638F399D19820DE900E99818 /* PKCameraRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 638F399C19820DE900E99818 /* PKCameraRoll.m */; };
 		638F39A019820EC100E99818 /* PKGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 638F399F19820EC100E99818 /* PKGroupCell.m */; };
+		638F39A21982163700E99818 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F39A11982163700E99818 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		638F399C19820DE900E99818 /* PKCameraRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCameraRoll.m; sourceTree = "<group>"; };
 		638F399E19820EC100E99818 /* PKGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGroupCell.h; sourceTree = "<group>"; };
 		638F399F19820EC100E99818 /* PKGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGroupCell.m; sourceTree = "<group>"; };
+		638F39A11982163700E99818 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				638F39A21982163700E99818 /* AssetsLibrary.framework in Frameworks */,
 				638F3960198201CF00E99818 /* CoreGraphics.framework in Frameworks */,
 				638F3964198201CF00E99818 /* CoreData.framework in Frameworks */,
 				638F3962198201CF00E99818 /* UIKit.framework in Frameworks */,
@@ -117,6 +120,7 @@
 		638F395C198201CF00E99818 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				638F39A11982163700E99818 /* AssetsLibrary.framework */,
 				638F395D198201CF00E99818 /* Foundation.framework */,
 				638F395F198201CF00E99818 /* CoreGraphics.framework */,
 				638F3961198201CF00E99818 /* UIKit.framework */,

@@ -7,8 +7,9 @@
 //
 
 #import "PKMasterViewController.h"
-
 #import "PKDetailViewController.h"
+#import "PKGroupCell.h"
+#import "PKCameraRoll.h"
 
 @interface PKMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -19,6 +20,8 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.cameraRoll = [[PKCameraRoll alloc] init];
+    self.cameraRoll.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -61,26 +64,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    if (self.cameraRoll.shots == nil) {
+        return 0;
+    }
+    return [self.cameraRoll.shots count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    PKGroupCell *cell = (PKGroupCell *)[tableView dequeueReusableCellWithIdentifier:@"GroupCell" forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,6 +116,13 @@
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setDetailItem:object];
     }
+}
+
+#pragma mark - Camera Roll Delegate
+
+- (void)shotsDidFinishLoading
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Fetched results controller
@@ -213,10 +224,13 @@
 }
  */
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(PKGroupCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+    NSDictionary *shot = [[self.cameraRoll.shots objectAtIndex:indexPath.row] firstObject];
+    ALAssetRepresentation *representation = [shot objectForKey:@"representation"];
+    
+    cell.nameLabel.text = [shot valueForKey:@"date"];
+    cell.bestImageView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
 }
 
 @end
