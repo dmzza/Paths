@@ -114,7 +114,9 @@
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSArray *shots = [self.cameraRoll.shots objectAtIndex:indexPath.row];
+        NSString *date = [[shots firstObject] objectForKey:@"date"];
         [[segue destinationViewController] setShots:shots];
+        [[segue destinationViewController] setTitle:date];
     }
 }
 

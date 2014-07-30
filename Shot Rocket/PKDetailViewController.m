@@ -12,14 +12,17 @@
 - (void)configureView;
 @end
 
-@implementation PKDetailViewController
+@implementation PKDetailViewController {
+    NSInteger i;
+    
+}
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setShots:(NSArray *)shots
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (_shots != shots) {
+        _shots = shots;
         
         // Update the view.
         [self configureView];
@@ -29,10 +32,8 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
-    }
+    i = 0;
+    [self loadNextShot];
 }
 
 - (void)viewDidLoad
@@ -46,6 +47,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
+}
+
+- (void)loadNextShot
+{
+    if (i >= self.shots.count) {
+        i = 0;
+    }
+    NSDictionary *shotDictionary = self.shots[i];
+    ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
+    
+    self.shotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
 }
 
 @end

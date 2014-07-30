@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <MapKit/MapKit.h>
 
 @interface PKDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *shots;
+@property (strong, nonatomic) IBOutlet UIImageView *shotView;
+@property (strong, nonatomic) IBOutlet MKMapView *shotsMap;
 
 @end
