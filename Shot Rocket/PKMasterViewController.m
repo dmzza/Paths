@@ -113,8 +113,8 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+        NSArray *shots = [self.cameraRoll.shots objectAtIndex:indexPath.row];
+        [[segue destinationViewController] setShots:shots];
     }
 }
 

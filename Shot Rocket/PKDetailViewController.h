@@ -10,7 +10,6 @@
 
 @interface PKDetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) NSArray *shots;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
