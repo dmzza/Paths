@@ -50,6 +50,34 @@
 
 }
 
+- (IBAction)likeShot {
+    [self loadNextShot];
+}
+
+- (IBAction)skipShot {
+    [self loadNextShot];
+}
+- (IBAction)didDragShot:(UIPanGestureRecognizer *)sender {
+    CGPoint translation = [sender translationInView:self.view];
+    UIGestureRecognizerState state = [sender state];
+    
+    switch (state) {
+        case UIGestureRecognizerStateBegan:
+            
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            [self.shotView setTransform:CGAffineTransformMakeTranslation(translation.x*2, translation.y*2)];
+            break;
+        
+        
+        default:
+            break;
+    }
+    
+    
+}
+
 - (void)loadNextShot
 {
     if (i >= self.shots.count) {
@@ -59,6 +87,16 @@
     ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
     
     self.shotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
+    i++;
+    
+    if (i < self.shots.count) {
+        NSDictionary *shotDictionary = self.shots[i];
+        ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
+        
+        self.underShotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
+    } else {
+        self.underShotView.image = nil;
+    }
 }
 
 @end
