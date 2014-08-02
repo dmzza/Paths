@@ -32,7 +32,12 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-    i = 0;
+    if (self.startingIndex) {
+        i = self.startingIndex;
+    } else {
+        i = 0;
+    }
+    
     [self loadNextShot];
 }
 

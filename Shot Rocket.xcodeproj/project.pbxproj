@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634DB730198D81D000EF6F6F /* PKShotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 634DB72F198D81D000EF6F6F /* PKShotCell.m */; };
+		634DB733198D85C300EF6F6F /* PKGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 634DB732198D85C300EF6F6F /* PKGroupViewController.m */; };
 		638F395E198201CF00E99818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F395D198201CF00E99818 /* Foundation.framework */; };
 		638F3960198201CF00E99818 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F395F198201CF00E99818 /* CoreGraphics.framework */; };
 		638F3962198201CF00E99818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F3961198201CF00E99818 /* UIKit.framework */; };
@@ -42,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		634DB72E198D81D000EF6F6F /* PKShotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKShotCell.h; sourceTree = "<group>"; };
+		634DB72F198D81D000EF6F6F /* PKShotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKShotCell.m; sourceTree = "<group>"; };
+		634DB731198D85C300EF6F6F /* PKGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGroupViewController.h; sourceTree = "<group>"; };
+		634DB732198D85C300EF6F6F /* PKGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGroupViewController.m; sourceTree = "<group>"; };
 		638F395A198201CF00E99818 /* Shot Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shot Rocket.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		638F395D198201CF00E99818 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		638F395F198201CF00E99818 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -151,6 +157,10 @@
 				638F399C19820DE900E99818 /* PKCameraRoll.m */,
 				638F399E19820EC100E99818 /* PKGroupCell.h */,
 				638F399F19820EC100E99818 /* PKGroupCell.m */,
+				634DB72E198D81D000EF6F6F /* PKShotCell.h */,
+				634DB72F198D81D000EF6F6F /* PKShotCell.m */,
+				634DB731198D85C300EF6F6F /* PKGroupViewController.h */,
+				634DB732198D85C300EF6F6F /* PKGroupViewController.m */,
 			);
 			path = "Shot Rocket";
 			sourceTree = "<group>";
@@ -282,6 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634DB733198D85C300EF6F6F /* PKGroupViewController.m in Sources */,
+				634DB730198D81D000EF6F6F /* PKShotCell.m in Sources */,
 				638F396C198201CF00E99818 /* main.m in Sources */,
 				638F3979198201CF00E99818 /* PKMasterViewController.m in Sources */,
 				638F397C198201CF00E99818 /* PKDetailViewController.m in Sources */,

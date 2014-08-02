@@ -13,6 +13,7 @@
 @interface PKDetailViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *shots;
+@property (nonatomic) NSInteger startingIndex;
 @property (strong, nonatomic) IBOutlet UIImageView *shotView;
 @property (strong, nonatomic) IBOutlet UIImageView *underShotView;
 @property (strong, nonatomic) IBOutlet MKMapView *shotsMap;

@@ -111,7 +111,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSArray *shots = [self.cameraRoll.shots objectAtIndex:indexPath.row];
         NSString *date = [[shots firstObject] objectForKey:@"date"];
