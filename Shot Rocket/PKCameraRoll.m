@@ -77,7 +77,7 @@
                     }
                     
                 } else if(index > 0) {
-                    _shots = days;
+                    _shots = [NSMutableArray arrayWithArray:[[days reverseObjectEnumerator] allObjects]];
                     NSLog(@"days: %lu", (unsigned long)days.count);
                     [weakSelf.delegate shotsDidFinishLoading];
                 }
