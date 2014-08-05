@@ -9,7 +9,7 @@
 #import "PKMasterViewController.h"
 #import "PKDetailViewController.h"
 #import "PKGroupCell.h"
-#import "PKCameraRoll.h"
+#import "Shot.h"
 
 @interface PKMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -20,8 +20,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.cameraRoll = [[PKCameraRoll alloc] init];
-    self.cameraRoll.delegate = self;
 }
 
 - (void)viewDidLoad
@@ -69,10 +67,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.cameraRoll.shots == nil) {
+    if (self.fetchedResultsController == nil) {
         return 0;
     }
-    return [self.cameraRoll.shots count];
+    return [self.fetchedResultsController.sections count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,18 +111,11 @@
 {
     if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSArray *shots = [self.cameraRoll.shots objectAtIndex:indexPath.row];
-        NSString *date = [[shots firstObject] objectForKey:@"date"];
+        NSArray *shots = [self.fetchedResultsController sections][indexPath.row];
+        NSString *date = [[shots firstObject] dateString];
         [[segue destinationViewController] setShots:shots];
         [[segue destinationViewController] setTitle:date];
     }
-}
-
-#pragma mark - Camera Roll Delegate
-
-- (void)shotsDidFinishLoading
-{
-    [self.tableView reloadData];
 }
 
 #pragma mark - Fetched results controller
@@ -137,21 +128,22 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
+    //[fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
+    NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateString" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTaken" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor, sectionDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"dateString" cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -228,11 +220,19 @@
 
 - (void)configureCell:(PKGroupCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *shot = [[self.cameraRoll.shots objectAtIndex:indexPath.row] firstObject];
-    ALAssetRepresentation *representation = [shot objectForKey:@"representation"];
+    NSIndexPath *convertedIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.row];
+    Shot *shot = [self.fetchedResultsController objectAtIndexPath:convertedIndexPath];
+    
+    [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+        
+        cell.bestImageView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Failed getting asset: %@", error.description);
+    }];
     
     cell.nameLabel.text = [shot valueForKey:@"date"];
-    cell.bestImageView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    
 }
 
 @end

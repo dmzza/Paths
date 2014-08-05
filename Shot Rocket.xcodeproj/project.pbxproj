@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		634DB730198D81D000EF6F6F /* PKShotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 634DB72F198D81D000EF6F6F /* PKShotCell.m */; };
 		634DB733198D85C300EF6F6F /* PKGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 634DB732198D85C300EF6F6F /* PKGroupViewController.m */; };
+		638BD015198F6CDA00B820AF /* PKShotSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 638BD014198F6CDA00B820AF /* PKShotSync.m */; };
+		638BD018198F6FBF00B820AF /* Shot.m in Sources */ = {isa = PBXBuildFile; fileRef = 638BD017198F6FBF00B820AF /* Shot.m */; };
 		638F395E198201CF00E99818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F395D198201CF00E99818 /* Foundation.framework */; };
 		638F3960198201CF00E99818 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F395F198201CF00E99818 /* CoreGraphics.framework */; };
 		638F3962198201CF00E99818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F3961198201CF00E99818 /* UIKit.framework */; };
@@ -48,6 +50,10 @@
 		634DB72F198D81D000EF6F6F /* PKShotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKShotCell.m; sourceTree = "<group>"; };
 		634DB731198D85C300EF6F6F /* PKGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGroupViewController.h; sourceTree = "<group>"; };
 		634DB732198D85C300EF6F6F /* PKGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGroupViewController.m; sourceTree = "<group>"; };
+		638BD013198F6CDA00B820AF /* PKShotSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKShotSync.h; sourceTree = "<group>"; };
+		638BD014198F6CDA00B820AF /* PKShotSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKShotSync.m; sourceTree = "<group>"; };
+		638BD016198F6FBF00B820AF /* Shot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
+		638BD017198F6FBF00B820AF /* Shot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shot.m; sourceTree = "<group>"; };
 		638F395A198201CF00E99818 /* Shot Rocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shot Rocket.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		638F395D198201CF00E99818 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		638F395F198201CF00E99818 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -161,6 +167,10 @@
 				634DB72F198D81D000EF6F6F /* PKShotCell.m */,
 				634DB731198D85C300EF6F6F /* PKGroupViewController.h */,
 				634DB732198D85C300EF6F6F /* PKGroupViewController.m */,
+				638BD013198F6CDA00B820AF /* PKShotSync.h */,
+				638BD014198F6CDA00B820AF /* PKShotSync.m */,
+				638BD016198F6FBF00B820AF /* Shot.h */,
+				638BD017198F6FBF00B820AF /* Shot.m */,
 			);
 			path = "Shot Rocket";
 			sourceTree = "<group>";
@@ -295,9 +305,11 @@
 				634DB733198D85C300EF6F6F /* PKGroupViewController.m in Sources */,
 				634DB730198D81D000EF6F6F /* PKShotCell.m in Sources */,
 				638F396C198201CF00E99818 /* main.m in Sources */,
+				638BD015198F6CDA00B820AF /* PKShotSync.m in Sources */,
 				638F3979198201CF00E99818 /* PKMasterViewController.m in Sources */,
 				638F397C198201CF00E99818 /* PKDetailViewController.m in Sources */,
 				638F3970198201CF00E99818 /* PKAppDelegate.m in Sources */,
+				638BD018198F6FBF00B820AF /* Shot.m in Sources */,
 				638F39A019820EC100E99818 /* PKGroupCell.m in Sources */,
 				638F399D19820DE900E99818 /* PKCameraRoll.m in Sources */,
 				638F3976198201CF00E99818 /* Shot_Rocket.xcdatamodeld in Sources */,

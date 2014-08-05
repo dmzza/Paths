@@ -9,6 +9,7 @@
 #import "PKAppDelegate.h"
 
 #import "PKMasterViewController.h"
+#import "PKShotSync.h"
 
 @implementation PKAppDelegate
 
@@ -21,7 +22,10 @@
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     PKMasterViewController *controller = (PKMasterViewController *)navigationController.topViewController;
+    PKShotSync *sync = [[PKShotSync alloc] init];
     controller.managedObjectContext = self.managedObjectContext;
+    sync.managedObjectContext = self.managedObjectContext;
+    
     return YES;
 }
 							
