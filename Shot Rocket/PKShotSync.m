@@ -29,7 +29,7 @@
     for (NSArray *day in self.cameraRoll.shots) {
         for (NSDictionary *shotDictionary in day) {
             error = nil;
-            [request setPredicate:[NSPredicate predicateWithFormat:@"timestamp IS %f", [shotDictionary objectForKey:@"timestamp"]]];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"dateTaken = %@", [shotDictionary objectForKey:@"timestamp"]]];
             if ([self.managedObjectContext countForFetchRequest:request error:&error] == 0 && error == nil) {
                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
                 Shot *shot = [[Shot alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
