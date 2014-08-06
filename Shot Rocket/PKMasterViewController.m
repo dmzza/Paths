@@ -113,8 +113,9 @@
 {
     if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSArray *shots = [self.fetchedResultsController sections][indexPath.row];
+        NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.section] objects];
         NSString *date = [[shots firstObject] dateString];
+        
         [[segue destinationViewController] setShots:shots];
         [[segue destinationViewController] setTitle:date];
     }
@@ -233,7 +234,7 @@
         NSLog(@"Failed getting asset: %@", error.description);
     }];
     
-    cell.nameLabel.text = [shot valueForKey:@"date"];
+    cell.nameLabel.text = [shot dateString];
     
 }
 
