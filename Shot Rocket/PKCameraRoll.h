@@ -16,7 +16,9 @@
 
 @property (strong, nonatomic) NSMutableArray *shots;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-@property (weak) id<PKCameraRollDelegate> delegate;
+@property (weak, nonatomic) id<PKCameraRollDelegate> delegate;
+
+- (id)initWithDelegate:(id<PKCameraRollDelegate>)aDelegate;
 
 @end
 

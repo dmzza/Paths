@@ -10,11 +10,15 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreData/CoreData.h>
 
-@interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@class PKShotSync;
+@protocol PKCameraRollDelegate;
+
+@interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, PKCameraRollDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) ALAssetsLibrary *library;
+@property (strong, nonatomic) PKShotSync *sync;
 
 - (void)shotsDidFinishLoading;
 

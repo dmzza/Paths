@@ -10,10 +10,11 @@
 
 @implementation PKCameraRoll
 
-- (id)init {
+- (id)initWithDelegate:(id<PKCameraRollDelegate>)aDelegate {
     self = [super init];
     if (self) {
         self.library = [[ALAssetsLibrary alloc] init];
+        _delegate = aDelegate;
         [self shots];
     }
     return self;
@@ -75,7 +76,7 @@
                         }
                         
                     }
-                    
+                    return;
                 } else if(index > 0) {
                     _shots = [NSMutableArray arrayWithArray:[[days reverseObjectEnumerator] allObjects]];
                     NSLog(@"days: %lu", (unsigned long)days.count);
@@ -90,5 +91,11 @@
     
     return nil;
 }
+
+/*- (void)setDelegate:(id<PKCameraRollDelegate>)delegate
+{
+    NSLog(@"delegate: %@", delegate.description);
+    _delegate = delegate;
+}*/
 
 @end

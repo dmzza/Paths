@@ -10,6 +10,8 @@
 #import "PKDetailViewController.h"
 #import "PKGroupCell.h"
 #import "Shot.h"
+#import "PKShotSync.h"
+#import "PKCameraRoll.h"
 
 @interface PKMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
