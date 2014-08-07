@@ -7,6 +7,7 @@
 //
 
 #import "PKDetailViewController.h"
+#import "Shot.h"
 
 @interface PKDetailViewController ()
 - (void)configureView;
@@ -31,6 +32,8 @@
 
 - (void)configureView
 {
+    self.library = [[ALAssetsLibrary alloc] init];
+    
     // Update the user interface for the detail item.
     if (self.startingIndex) {
         i = self.startingIndex;
@@ -56,6 +59,14 @@
 }
 
 - (IBAction)likeShot {
+    Shot *shot = [self.shots objectAtIndex:i];
+    NSError *error;
+    
+    shot.upVotes = [NSNumber numberWithInt:[shot.upVotes intValue] + 1];
+    
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Error saving like: %@", error.description);
+    }
     [self loadNextShot];
 }
 
@@ -126,17 +137,28 @@
     if (i >= self.shots.count) {
         i = 0;
     }
-    NSDictionary *shotDictionary = self.shots[i];
-    ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
+    Shot *shot = [self.shots objectAtIndex:i];
     
-    self.shotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
+    [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+        
+        self.shotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Failed getting asset: %@", error.description);
+    }];
     i++;
     
     if (i < self.shots.count) {
-        NSDictionary *shotDictionary = self.shots[i];
-        ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
+        Shot *shot = [self.shots objectAtIndex:i];
         
-        self.underShotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
+        [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+            ALAssetRepresentation *representation = [asset defaultRepresentation];
+            
+            self.underShotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+        } failureBlock:^(NSError *error) {
+            NSLog(@"Failed getting asset: %@", error.description);
+        }];
+
     } else {
         self.underShotView.image = nil;
     }

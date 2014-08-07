@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MapKit/MapKit.h>
+#import <Foundation/Foundation.h>
 
 @interface PKDetailViewController : UIViewController
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 @property (strong, nonatomic) NSArray *shots;
 @property (nonatomic) NSInteger startingIndex;
 @property (strong, nonatomic) IBOutlet UIImageView *shotView;
