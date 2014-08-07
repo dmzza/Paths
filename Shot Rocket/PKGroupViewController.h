@@ -12,5 +12,6 @@
 @interface PKGroupViewController : UICollectionViewController
 
 @property (strong, nonatomic) NSArray *shots;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 
 @end

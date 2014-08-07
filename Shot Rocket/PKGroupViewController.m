@@ -9,6 +9,7 @@
 #import "PKGroupViewController.h"
 #import "PKShotCell.h"
 #import "PKDetailViewController.h"
+#import "Shot.h"
 
 @interface PKGroupViewController ()
 
@@ -29,6 +30,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.library = [[ALAssetsLibrary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,12 +69,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PKShotCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShotCell" forIndexPath:indexPath];
+    Shot *shot = [self.shots objectAtIndex:indexPath.item];
     
-    NSDictionary *shotDictionary = self.shots[indexPath.item];
-    ALAssetRepresentation *representation = [shotDictionary objectForKey:@"representation"];
-    
-    cell.baseShotView.image = [UIImage imageWithCGImage:representation.fullScreenImage scale:2.0 orientation:UIImageOrientationUp];
-    
+    [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+        
+        cell.baseShotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Failed getting asset: %@", error.description);
+    }];
     return cell;
 }
 
