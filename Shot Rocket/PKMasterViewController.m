@@ -22,6 +22,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.library = [[ALAssetsLibrary alloc] init];
 }
 
 - (void)viewDidLoad
@@ -113,7 +114,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.section] objects];
+        NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.row] objects];
         NSString *date = [[shots firstObject] dateString];
         
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
@@ -140,8 +141,9 @@
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateString" ascending:NO];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTaken" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor, sectionDescriptor];
+    //NSSortDescriptor *voteSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"upVotes" ascending:NO];
+    NSSortDescriptor *dateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTaken" ascending:NO];
+    NSArray *sortDescriptors = @[sectionDescriptor, dateSortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
