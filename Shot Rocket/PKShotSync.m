@@ -29,14 +29,15 @@
     for (NSArray *day in self.cameraRoll.shots) {
         for (NSDictionary *shotDictionary in day) {
             error = nil;
-            [request setPredicate:[NSPredicate predicateWithFormat:@"dateTaken = %@", [shotDictionary objectForKey:@"timestamp"]]];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"timeStamp = %@", [shotDictionary objectForKey:@"timestamp"]]];
             if ([self.managedObjectContext countForFetchRequest:request error:&error] == 0 && error == nil) {
                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
                 Shot *shot = [[Shot alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
             
                 shot.assetUrl = [[(ALAssetRepresentation *)[shotDictionary objectForKey:@"representation"] url] absoluteString];
-                shot.dateString = [shotDictionary objectForKey:@"date"];
-                shot.dateTaken = [shotDictionary objectForKey:@"timestamp"];
+                shot.dateString = [shotDictionary objectForKey:@"dateString"];
+                shot.dateStamp = [shotDictionary objectForKey:@"dateStamp"];
+                shot.timeStamp = [shotDictionary objectForKey:@"timeStamp"];
                 shot.latitude = [NSNumber numberWithDouble:[(CLLocation *)[shotDictionary objectForKey:@"location"] coordinate].latitude];
                 shot.longtiude = [NSNumber numberWithDouble:[(CLLocation *)[shotDictionary objectForKey:@"location"] coordinate].longitude];
                 //shot.remoteUrl = [shotDictionary objectForKey:@""];

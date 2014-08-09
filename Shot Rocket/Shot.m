@@ -14,7 +14,8 @@
 
 @dynamic assetUrl;
 @dynamic dateString;
-@dynamic dateTaken;
+@dynamic dateStamp;
+@dynamic timeStamp;
 @dynamic downVotes;
 @dynamic latitude;
 @dynamic longtiude;

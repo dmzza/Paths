@@ -62,11 +62,14 @@
                         //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
                         NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
                         //NSDateFormatter *formatter = [NSDateFormatter dateFormatFromTemplate:@"yMMMMd" options:0 locale:[NSLocale currentLocale]];
-                        NSTimeInterval timestamp = [dateTaken timeIntervalSince1970];
-                        NSString *formattedDate = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
-                        NSDictionary *photo = @{@"timestamp": [NSNumber numberWithDouble:timestamp], @"date": formattedDate, @"location": location, @"asset": result, @"representation": representation};
+                        NSTimeInterval timeStamp = [dateTaken timeIntervalSince1970];
+                        NSString *dateString = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
+                        NSDateFormatter *dateStampFormatter = [[NSDateFormatter alloc] init];
+                        [dateStampFormatter setDateFormat:@"yyyy-MM-dd"];
+                        NSString *dateStamp = [dateStampFormatter stringFromDate:dateTaken];
+                        NSDictionary *photo = @{@"timeStamp": [NSNumber numberWithDouble:timeStamp], @"dateString": dateString, @"dateStamp": dateStamp, @"location": location, @"asset": result, @"representation": representation};
                         
-                        if (days.count == 0 || ![[(NSDictionary *)[(NSMutableArray *)days.lastObject firstObject] objectForKey:@"date"] isEqualToString:formattedDate]) {
+                        if (days.count == 0 || ![[(NSDictionary *)[(NSMutableArray *)days.lastObject firstObject] objectForKey:@"date"] isEqualToString:dateStamp]) {
                             NSMutableArray *photos = [[NSMutableArray alloc] init];
                             [photos addObject:photo];
                             [days addObject:photos];

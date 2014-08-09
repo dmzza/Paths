@@ -15,7 +15,8 @@
 
 @property (nonatomic, retain) NSString * assetUrl;
 @property (nonatomic, retain) NSString * dateString;
-@property (nonatomic, retain) NSNumber * dateTaken;
+@property (nonatomic, retain) NSString * dateStamp;
+@property (nonatomic, retain) NSNumber * timeStamp;
 @property (nonatomic, retain) NSNumber * downVotes;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longtiude;

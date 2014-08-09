@@ -140,16 +140,16 @@
     //[fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateString" ascending:NO];
+    NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateStamp" ascending:NO];
     //NSSortDescriptor *voteSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"upVotes" ascending:NO];
-    NSSortDescriptor *dateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTaken" ascending:NO];
-    NSArray *sortDescriptors = @[sectionDescriptor, dateSortDescriptor];
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSArray *sortDescriptors = @[sectionDescriptor, timeSortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"dateString" cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"dateStamp" cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
