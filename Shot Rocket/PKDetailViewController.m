@@ -36,9 +36,9 @@
     
     // Update the user interface for the detail item.
     if (self.startingIndex) {
-        i = self.startingIndex;
+        self.nextIndex = self.startingIndex;
     } else {
-        i = 0;
+        self.nextIndex = 0;
     }
     
     [self loadNextShot];
@@ -134,9 +134,7 @@
 
 - (void)loadNextShot
 {
-    if (i >= self.shots.count) {
-        i = 0;
-    }
+    i = self.nextIndex;
     Shot *shot = [self.shots objectAtIndex:i];
     
     [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
@@ -146,22 +144,21 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Failed getting asset: %@", error.description);
     }];
-    i++;
     
-    if (i < self.shots.count) {
-        Shot *shot = [self.shots objectAtIndex:i];
-        
-        [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
-            ALAssetRepresentation *representation = [asset defaultRepresentation];
-            
-            self.underShotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
-        } failureBlock:^(NSError *error) {
-            NSLog(@"Failed getting asset: %@", error.description);
-        }];
-
-    } else {
-        self.underShotView.image = nil;
+    self.nextIndex = i+1;
+    if (self.nextIndex >= self.shots.count) {
+        self.nextIndex = 0;
     }
+    
+    shot = [self.shots objectAtIndex:self.nextIndex];
+        
+    [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+            
+        self.underShotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Failed getting asset: %@", error.description);
+    }];
 }
 
 @end

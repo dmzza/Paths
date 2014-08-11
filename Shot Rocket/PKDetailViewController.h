@@ -17,6 +17,7 @@
 @property (strong, nonatomic) ALAssetsLibrary *library;
 @property (strong, nonatomic) NSArray *shots;
 @property (nonatomic) NSInteger startingIndex;
+@property (nonatomic) NSInteger nextIndex;
 @property (strong, nonatomic) IBOutlet UIImageView *shotView;
 @property (strong, nonatomic) IBOutlet UIImageView *underShotView;
 @property (strong, nonatomic) IBOutlet MKMapView *shotsMap;
