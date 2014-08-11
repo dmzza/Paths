@@ -24,6 +24,6 @@
 
 @protocol PKCameraRollDelegate <NSObject>
 
-- (void)shotsDidFinishLoading;
+- (void)didLoadShot:(NSDictionary *)shotDictionary;
 
 @end

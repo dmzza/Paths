@@ -27,7 +27,6 @@
     }
     
     __weak PKCameraRoll* weakSelf = self;
-    NSMutableArray *days = [[NSMutableArray alloc] init];
     
     // Photo Stream
     //[self.library enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -37,16 +36,12 @@
             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
             //_cameraRoll = group;
             NSLog(@"found saved photos %@", [group description]);
-            
-            
-            
             if (group.numberOfAssets == 0) {
                 return;
             }
             
-            [group enumerateAssetsWithOptions:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+            [group enumerateAssetsWithOptions:NSEnumerationConcurrent usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 if (result != nil) {
-                    //NSLog(@"photo: %@", represenation.metadata);
                     CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
                     // TODO: Remove this fake location, just used to test with the iPod
                     if (location == nil) {
@@ -69,21 +64,9 @@
                         NSString *dateStamp = [dateStampFormatter stringFromDate:dateTaken];
                         NSDictionary *photo = @{@"timeStamp": [NSNumber numberWithDouble:timeStamp], @"dateString": dateString, @"dateStamp": dateStamp, @"location": location, @"asset": result, @"representation": representation};
                         
-                        if (days.count == 0 || ![[(NSDictionary *)[(NSMutableArray *)days.lastObject firstObject] objectForKey:@"date"] isEqualToString:dateStamp]) {
-                            NSMutableArray *photos = [[NSMutableArray alloc] init];
-                            [photos addObject:photo];
-                            [days addObject:photos];
-                            
-                        } else {
-                            [(NSMutableArray *)days.lastObject addObject:photo];
-                        }
-                        
+                        [weakSelf.delegate didLoadShot:photo];
                     }
                     return;
-                } else if(index > 0) {
-                    _shots = [NSMutableArray arrayWithArray:[[days reverseObjectEnumerator] allObjects]];
-                    NSLog(@"days: %lu", (unsigned long)days.count);
-                    [weakSelf.delegate shotsDidFinishLoading];
                 }
             }];
             

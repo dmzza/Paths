@@ -17,6 +17,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) PKCameraRoll *cameraRoll;
 
-- (void)shotsDidFinishLoading;
+- (void)didLoadShot:(NSDictionary *)shotDictionary;
 
 @end
