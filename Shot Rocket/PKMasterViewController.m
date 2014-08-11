@@ -141,9 +141,9 @@
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateStamp" ascending:NO];
-    //NSSortDescriptor *voteSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"upVotes" ascending:NO];
+    NSSortDescriptor *voteSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"upVotes" ascending:NO];
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-    NSArray *sortDescriptors = @[sectionDescriptor, timeSortDescriptor];
+    NSArray *sortDescriptors = @[sectionDescriptor, voteSortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
