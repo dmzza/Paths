@@ -28,52 +28,54 @@
     
     __weak PKCameraRoll* weakSelf = self;
     
-    // Photo Stream
-    //[self.library enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-    // Camera Roll
-    [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        if (group != nil) {
-            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-            //_cameraRoll = group;
-            NSLog(@"found saved photos %@", [group description]);
-            if (group.numberOfAssets == 0) {
-                return;
-            }
-            
-            [group enumerateAssetsWithOptions:NSEnumerationConcurrent usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                if (result != nil) {
-                    CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
-                    // TODO: Remove this fake location, just used to test with the iPod
-                    if (location == nil) {
-                        location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
-                    }
-                    if (location != nil) {
-                        NSLog(@"photo");
-                        
-                        ALAssetRepresentation *representation = [result defaultRepresentation];
-                        if (representation == nil) {
-                            return;
-                        }
-                        //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
-                        NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
-                        //NSDateFormatter *formatter = [NSDateFormatter dateFormatFromTemplate:@"yMMMMd" options:0 locale:[NSLocale currentLocale]];
-                        NSTimeInterval timeStamp = [dateTaken timeIntervalSince1970];
-                        NSString *dateString = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
-                        NSDateFormatter *dateStampFormatter = [[NSDateFormatter alloc] init];
-                        [dateStampFormatter setDateFormat:@"yyyy-MM-dd"];
-                        NSString *dateStamp = [dateStampFormatter stringFromDate:dateTaken];
-                        NSDictionary *photo = @{@"timeStamp": [NSNumber numberWithDouble:timeStamp], @"dateString": dateString, @"dateStamp": dateStamp, @"location": location, @"asset": result, @"representation": representation};
-                        
-                        [weakSelf.delegate didLoadShot:photo];
-                    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Photo Stream
+        //[self.library enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        // Camera Roll
+        [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if (group != nil) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+                //_cameraRoll = group;
+                NSLog(@"found saved photos %@", [group description]);
+                if (group.numberOfAssets == 0) {
                     return;
                 }
-            }];
             
-        }
-    } failureBlock:^(NSError *error) {
-        NSLog(@"denied access to photos");
-    }];
+                [group enumerateAssetsWithOptions:NSEnumerationConcurrent usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                    if (result != nil) {
+                        CLLocation *location = [result valueForProperty:ALAssetPropertyLocation];
+                        // TODO: Remove this fake location, just used to test with the iPod
+                        if (location == nil) {
+                            location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
+                        }
+                        if (location != nil) {
+                            NSLog(@"photo");
+                        
+                            ALAssetRepresentation *representation = [result defaultRepresentation];
+                            if (representation == nil) {
+                                return;
+                            }
+                            //UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:(UIImageOrientation)[representation orientation]];
+                            NSDate *dateTaken = [result valueForProperty:ALAssetPropertyDate];
+                            //NSDateFormatter *formatter = [NSDateFormatter dateFormatFromTemplate:@"yMMMMd" options:0 locale:[NSLocale currentLocale]];
+                            NSTimeInterval timeStamp = [dateTaken timeIntervalSince1970];
+                            NSString *dateString = [NSDateFormatter localizedStringFromDate:dateTaken dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
+                            NSDateFormatter *dateStampFormatter = [[NSDateFormatter alloc] init];
+                            [dateStampFormatter setDateFormat:@"yyyy-MM-dd"];
+                            NSString *dateStamp = [dateStampFormatter stringFromDate:dateTaken];
+                            NSDictionary *photo = @{@"timeStamp": [NSNumber numberWithDouble:timeStamp], @"dateString": dateString, @"dateStamp": dateStamp, @"location": location, @"asset": result, @"representation": representation};
+                        
+                            [weakSelf.delegate didLoadShot:photo];
+                        }
+                        return;
+                    }
+                }];
+            
+            }
+        } failureBlock:^(NSError *error) {
+            NSLog(@"denied access to photos");
+        }];
+    });
     
     return nil;
 }
