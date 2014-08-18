@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class PKShotSync;
+@class PKMasterViewController;
 
 @interface PKAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (strong, nonatomic) PKShotSync *shotSync;
+@property (readonly, strong, atomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, atomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, atomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, atomic) PKShotSync *shotSync;
+@property (strong, atomic) PKMasterViewController *masterVC;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

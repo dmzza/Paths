@@ -28,7 +28,6 @@
     
     __weak PKCameraRoll* weakSelf = self;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Photo Stream
         //[self.library enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         // Camera Roll
@@ -75,7 +74,6 @@
         } failureBlock:^(NSError *error) {
             NSLog(@"denied access to photos");
         }];
-    });
     
     return nil;
 }

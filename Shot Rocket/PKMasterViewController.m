@@ -114,7 +114,8 @@
 {
     if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.row] objects];
+        NSLog(@"%u", self.fetchedResultsController.sections.count);
+        NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][0] objects]; //[indexPath.row] objects];
         NSString *date = [[shots firstObject] dateString];
         
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
@@ -166,7 +167,7 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView beginUpdates];
+    //[self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -211,7 +212,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    //[self.tableView endUpdates];
 }
 
 /*
@@ -226,7 +227,7 @@
 
 - (void)configureCell:(PKGroupCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSIndexPath *convertedIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.row];
+    NSIndexPath *convertedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];//indexPath.row];
     Shot *shot = [self.fetchedResultsController objectAtIndexPath:convertedIndexPath];
     
     [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {

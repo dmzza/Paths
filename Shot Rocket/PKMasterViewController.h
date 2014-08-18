@@ -15,9 +15,8 @@
 
 @interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, atomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, atomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-@property (strong, nonatomic) PKShotSync *sync;
 
 @end

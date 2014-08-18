@@ -27,7 +27,7 @@
     NSError *error = nil;
     [request setPredicate:[NSPredicate predicateWithFormat:@"timeStamp = %@", [shotDictionary objectForKey:@"timeStamp"]]];
     if ([self.managedObjectContext countForFetchRequest:request error:&error] == 0 && error == nil) {
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
+        /*NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
         Shot *shot = [[Shot alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
         
         shot.assetUrl = [[(ALAssetRepresentation *)[shotDictionary objectForKey:@"representation"] url] absoluteString];
@@ -44,7 +44,7 @@
             NSLog(@"Error syncing shots: %@", error.description);
         } else {
             NSLog(@"Shots syncd");
-        }
+        }*/
     } else {
         if (error != nil) {
             NSLog(@"Error counting shots: %@", error.description);

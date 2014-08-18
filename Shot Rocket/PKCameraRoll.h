@@ -14,9 +14,9 @@
 
 @interface PKCameraRoll : NSObject
 
-@property (strong, nonatomic) NSMutableArray *shots;
-@property (strong, nonatomic) ALAssetsLibrary *library;
-@property (weak, nonatomic) id<PKCameraRollDelegate> delegate;
+@property (strong, atomic) NSMutableArray *shots;
+@property (strong, atomic) ALAssetsLibrary *library;
+@property (weak, atomic) id<PKCameraRollDelegate> delegate;
 
 - (id)initWithDelegate:(id<PKCameraRollDelegate>)aDelegate;
 

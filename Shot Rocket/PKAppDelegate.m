@@ -20,11 +20,17 @@
 {
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    PKMasterViewController *controller = (PKMasterViewController *)navigationController.topViewController;
-    self.shotSync = [[PKShotSync alloc] init];
+    self.masterVC = (PKMasterViewController *)navigationController.topViewController;
     
-    controller.managedObjectContext = self.managedObjectContext;
-    self.shotSync.managedObjectContext = self.managedObjectContext;
+    
+    self.masterVC.managedObjectContext = self.managedObjectContext;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.shotSync = [[PKShotSync alloc] init];
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        [context setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+        self.shotSync.managedObjectContext = context;
+    });
     
     return YES;
 }
@@ -83,7 +89,7 @@
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return _managedObjectContext;

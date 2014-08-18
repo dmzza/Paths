@@ -14,7 +14,7 @@
 
 @interface PKShotSync : NSObject <PKCameraRollDelegate>
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, atomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) PKCameraRoll *cameraRoll;
 
 - (void)didLoadShot:(NSDictionary *)shotDictionary;
