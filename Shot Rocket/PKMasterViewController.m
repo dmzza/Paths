@@ -114,7 +114,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showGroup"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSLog(@"%u", self.fetchedResultsController.sections.count);
+        NSLog(@"%u", [(id<NSFetchedResultsSectionInfo>)self.fetchedResultsController.sections[0] objects].count);
         NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][0] objects]; //[indexPath.row] objects];
         NSString *date = [[shots firstObject] dateString];
         
