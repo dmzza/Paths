@@ -64,7 +64,7 @@
     
     shot.upVotes = [NSNumber numberWithInt:[shot.upVotes intValue] + 1];
     
-    if (![self.managedObjectContext save:&error]) {
+    if (![[SSManagedObject mainQueueContext] save:&error]) {
         NSLog(@"Error saving like: %@", error.description);
     }
     [self loadNextShot];
@@ -112,7 +112,7 @@
                 [UIView animateWithDuration:0.5 animations:^{
                     [weakSelf.shotView setTransform:CGAffineTransformMakeTranslation(-640 - translation.x, 0)];
                 } completion:^(BOOL finished) {
-                    [weakSelf likeShot];
+                    [weakSelf skipShot];
                     [weakSelf.shotView setTransform:CGAffineTransformIdentity];
                 }];
             } else {
