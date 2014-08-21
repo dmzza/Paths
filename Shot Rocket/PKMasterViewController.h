@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreData/CoreData.h>
+#import <SSDataKit/SSDataKit.h>
 
 @class PKShotSync;
 @protocol PKCameraRollDelegate;
 
-@interface PKMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface PKMasterViewController : SSManagedTableViewController
 
-@property (strong, atomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, atomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) ALAssetsLibrary *library;
 
 @end

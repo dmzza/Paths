@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <SSDataKit/SSDataKit.h>
 
 @class Shot;
 
-@interface Shot : NSManagedObject
+@interface Shot : SSManagedObject
 
 @property (nonatomic, retain) NSString * assetUrl;
 @property (nonatomic, retain) NSString * dateString;
@@ -33,5 +34,8 @@
 - (void)removeGroupedShotsObject:(Shot *)value;
 - (void)addGroupedShots:(NSSet *)values;
 - (void)removeGroupedShots:(NSSet *)values;
+
++ (Shot *)existingShotWithTimeStamp:(NSNumber *)timeStamp;
++ (Shot *)existingShotWithTimeStamp:(NSNumber *)timeStamp context:(NSManagedObjectContext *)context;
 
 @end

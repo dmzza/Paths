@@ -10,7 +10,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MapKit/MapKit.h>
 #import <Foundation/Foundation.h>
-#import <SSDataKit/SSDataKit.h>
 
 @interface PKDetailViewController : UIViewController
 

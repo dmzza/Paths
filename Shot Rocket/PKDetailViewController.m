@@ -64,8 +64,8 @@
     
     shot.upVotes = [NSNumber numberWithInt:[shot.upVotes intValue] + 1];
     
-    if (![[SSManagedObject mainQueueContext] save:&error]) {
-        NSLog(@"Error saving like: %@", error.description);
+    if (![shot save]) {
+        NSLog(@"Error saving like");
     }
     [self loadNextShot];
 }

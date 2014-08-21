@@ -18,19 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     // Override point for customization after application launch.
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    self.masterVC = (PKMasterViewController *)navigationController.topViewController;
+    
+    [SSManagedObject mainQueueContext]; // Context is created by sending this message. https://github.com/soffes/ssdatakit/issues/31
     
     
-    self.masterVC.managedObjectContext = self.managedObjectContext;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSBlockOperation *shotSyncOperation = [NSBlockOperation blockOperationWithBlock:^{
         self.shotSync = [[PKShotSync alloc] init];
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-        [context setPersistentStoreCoordinator:self.persistentStoreCoordinator];
-        self.shotSync.managedObjectContext = context;
-    });
+        self.shotSync.managedObjectContext = [SSManagedObject privateQueueContext];
+    }];
+    
+    NSOperationQueue *syncQueue = [[NSOperationQueue alloc] init];
+    [syncQueue addOperation:shotSyncOperation];
     
     return YES;
 }

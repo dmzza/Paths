@@ -23,12 +23,9 @@
 
 - (void)didLoadShot:(NSDictionary *)shotDictionary
 {
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Shot"];
-    NSError *error = nil;
-    [request setPredicate:[NSPredicate predicateWithFormat:@"timeStamp = %@", [shotDictionary objectForKey:@"timeStamp"]]];
-    if ([self.managedObjectContext countForFetchRequest:request error:&error] == 0 && error == nil) {
-        /*NSEntityDescription *entity = [NSEntityDescription entityForName:@"Shot" inManagedObjectContext:self.managedObjectContext];
-        Shot *shot = [[Shot alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    if (![Shot existingShotWithTimeStamp:[shotDictionary objectForKey:@"timeStamp"] context:[Shot privateQueueContext]]) {
+        Shot *shot = [[Shot alloc] initWithContext:[Shot privateQueueContext]];
         
         shot.assetUrl = [[(ALAssetRepresentation *)[shotDictionary objectForKey:@"representation"] url] absoluteString];
         shot.dateString = [shotDictionary objectForKey:@"dateString"];
@@ -39,20 +36,15 @@
         //shot.remoteUrl = [shotDictionary objectForKey:@""];
         //shot.updatedAt = [shotDictionary objectForKey:@""];
         //shot.parent = [shotDictionary objectForKey:@""];
-        NSLog(@"Shot created");
-        if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Error syncing shots: %@", error.description);
+        
+        if ([shot save]) {
+            NSLog(@"Shot created");
         } else {
-            NSLog(@"Shots syncd");
-        }*/
-    } else {
-        if (error != nil) {
-            NSLog(@"Error counting shots: %@", error.description);
-        } else {
-            NSLog(@"Shot already exists");
+            NSLog(@"Couldn't save shot");
         }
+    } else {
+        NSLog(@"Shot already exists");
     }
-
 }
 
 @end

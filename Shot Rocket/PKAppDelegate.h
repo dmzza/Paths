@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SSDataKit/SSDataKit.h>
 
 @class PKShotSync;
 @class PKMasterViewController;
