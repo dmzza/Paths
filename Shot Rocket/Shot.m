@@ -7,7 +7,6 @@
 //
 
 #import "Shot.h"
-#import "Shot.h"
 
 
 @implementation Shot
@@ -64,9 +63,13 @@ static NSURL *__persistentStoreURL = nil;
 	fetchRequest.entity = [self entityWithContext:context];
 	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeStamp = %@", timeStamp];
 	fetchRequest.fetchLimit = 1;
+    __block NSArray *results = nil;
 	
 	// Execute the fetch request
-	NSArray *results = [context executeFetchRequest:fetchRequest error:nil];
+    [context performBlockAndWait:^
+    {
+        results = [context executeFetchRequest:fetchRequest error:nil];
+    }];
 	
 	// If the object is not found, return nil
 	if (results.count == 0) {
