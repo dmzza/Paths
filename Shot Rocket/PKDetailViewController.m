@@ -41,6 +41,9 @@
         self.nextIndex = 0;
     }
     
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.animator.delegate = self;
+    
     [self loadNextShot];
 }
 
@@ -74,6 +77,8 @@
     [self loadNextShot];
 }
 - (IBAction)didDragShot:(UIPanGestureRecognizer *)sender {
+    //[self.animator removeAllBehaviors];
+    
     CGPoint translation = [sender translationInView:self.view];
     UIGestureRecognizerState state = [sender state];
     __weak __typeof__(self) weakSelf = self;
@@ -83,32 +88,40 @@
             
             break;
             
-        case UIGestureRecognizerStateChanged:
-            [self.shotView setTransform:CGAffineTransformMakeTranslation(translation.x*2, translation.y*2)];
+        case UIGestureRecognizerStateChanged: {
+            CGPoint anchor = translation;
+            anchor.x += 160;
+            anchor.y += 284;
+            UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.shotView attachedToAnchor: anchor];
+            attachmentBehavior.length = 0.0;
+            [self.animator removeAllBehaviors];
+            [self.animator addBehavior:attachmentBehavior];
             break;
-        
-        case UIGestureRecognizerStateEnded:
-            [self.shotView setTransform:CGAffineTransformMakeTranslation(translation.x*2, translation.y*2)];
-            if (translation.x > 0) {
-                [UIView animateWithDuration:0.5 animations:^{
+        }
+            
+        case UIGestureRecognizerStateEnded: {
+            //[self.shotView setTransform:CGAffineTransformMakeTranslation(translation.x*2, translation.y*2)];
+            
+            
+            if (translation.x > 0) { // right
+                UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.shotView] mode:UIPushBehaviorModeInstantaneous];
+                pushBehavior.pushDirection = CGVectorMake(200.0, 0);
+                [self.animator removeAllBehaviors];
+                [self.animator addBehavior:pushBehavior];
+                //[self likeShot];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf.animator removeAllBehaviors];
+                    UISnapBehavior *attachmentBehavior = [[UISnapBehavior alloc] initWithItem:weakSelf.shotView snapToPoint:self.view.center];
+                    [weakSelf.animator addBehavior:attachmentBehavior];
+                });
+                /*[UIView animateWithDuration:0.5 animations:^{
                     [weakSelf.shotView setTransform:CGAffineTransformMakeTranslation(640, translation.y)];
                 } completion:^(BOOL finished) {
                     [weakSelf likeShot];
                     [weakSelf.shotView setTransform:CGAffineTransformIdentity];
-                }];
-                
-                /*[UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                    [weakSelf.shotView setTransform:CGAffineTransformMakeTranslation(640, translation.y)];
-                } completion:^(BOOL finished) {
-                    [weakSelf.shotView setTransform:CGAffineTransformMakeTranslation(-640, 0)];
-                    [weakSelf likeShot];
-                    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.0 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                        [weakSelf.shotView setTransform:CGAffineTransformIdentity];
-                    } completion:^(BOOL finished) {
-                        
-                    }];
                 }];*/
-            } else if (translation.x < 0) {
+             
+            }/* else if (translation.x < 0) { // left
                 [UIView animateWithDuration:0.5 animations:^{
                     [weakSelf.shotView setTransform:CGAffineTransformMakeTranslation(-640 - translation.x, 0)];
                 } completion:^(BOOL finished) {
@@ -121,9 +134,10 @@
                 } completion:^(BOOL finished) {
                     
                 }];
-            }
+            }*/
             
             break;
+        }
         
         default:
             break;
@@ -159,6 +173,19 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Failed getting asset: %@", error.description);
     }];
+}
+
+#pragma mark - UIDynamicAnimator delegate
+
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+{
+    //[self.animator removeAllBehaviors];
+    //[self.shotView setTransform:CGAffineTransformIdentity];
+}
+
+- (void)dynamicAnimatorWillResume:(UIDynamicAnimator *)animator
+{
+    
 }
 
 @end
