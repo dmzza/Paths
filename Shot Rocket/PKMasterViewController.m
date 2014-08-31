@@ -30,6 +30,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:note waitUntilDone:NO];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,7 +46,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger sections = [super numberOfSectionsInTableView:tableView];
-    NSLog(@"sections: %lu", sections);
     
     return sections;
 }

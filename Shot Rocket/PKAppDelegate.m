@@ -9,6 +9,7 @@
 #import "PKAppDelegate.h"
 #import "PKShotSync.h"
 #import "PKMasterViewController.h"
+#import "Shot.h"
 
 @implementation PKAppDelegate
 
@@ -21,12 +22,12 @@
     
     // Override point for customization after application launch.
     
-    [SSManagedObject mainQueueContext]; // Context is created by sending this message. https://github.com/soffes/ssdatakit/issues/31
+    [Shot mainQueueContext]; // Context is created by sending this message. https://github.com/soffes/ssdatakit/issues/31
     
     
     NSBlockOperation *shotSyncOperation = [NSBlockOperation blockOperationWithBlock:^{
         self.shotSync = [[PKShotSync alloc] init];
-        self.shotSync.managedObjectContext = [SSManagedObject privateQueueContext];
+        self.shotSync.managedObjectContext = [Shot privateQueueContext];
     }];
     
     NSOperationQueue *syncQueue = [[NSOperationQueue alloc] init];
@@ -66,7 +67,7 @@
 - (void)saveContext
 {
     NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    NSManagedObjectContext *managedObjectContext = [Shot mainQueueContext];
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
              // Replace this implementation with code to handle the error appropriately.
@@ -87,11 +88,8 @@
         return _managedObjectContext;
     }
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
+    _managedObjectContext = [Shot mainQueueContext];;
+    
     return _managedObjectContext;
 }
 

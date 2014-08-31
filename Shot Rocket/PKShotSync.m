@@ -23,9 +23,8 @@
 
 - (void)didLoadShot:(NSDictionary *)shotDictionary
 {
-    
-    if (![Shot existingShotWithTimeStamp:[shotDictionary objectForKey:@"timeStamp"] context:[Shot privateQueueContext]]) {
-        [[Shot privateQueueContext] performBlock:^{
+    [[Shot privateQueueContext] performBlock:^{
+        if (![Shot existingShotWithTimeStamp:[shotDictionary objectForKey:@"timeStamp"] context:[Shot privateQueueContext]]) {
             Shot *shot = [[Shot alloc] initWithContext:[Shot privateQueueContext]];
             
             shot.assetUrl = [[(ALAssetRepresentation *)[shotDictionary objectForKey:@"representation"] url] absoluteString];
@@ -43,10 +42,11 @@
             } else {
                 NSLog(@"Couldn't save shot");
             }
-        }];
-    } else {
-        NSLog(@"Shot already exists");
-    }
+        
+        } else {
+            NSLog(@"Shot already exists");
+        }
+    }];
 }
 
 @end
