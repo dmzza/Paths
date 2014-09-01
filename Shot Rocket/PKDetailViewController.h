@@ -14,16 +14,11 @@
 
 @interface PKDetailViewController : SSManagedCollectionViewController <UIDynamicAnimatorDelegate>
 
-//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-@property (strong, nonatomic) NSArray *shots;
 @property (strong, nonatomic) NSString *dateStamp;
 @property (nonatomic) NSInteger startingIndex;
 @property (nonatomic) NSInteger nextIndex;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (nonatomic, readonly) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) IBOutlet UIImageView *shotView;
-@property (strong, nonatomic) IBOutlet UIImageView *underShotView;
-@property (strong, nonatomic) IBOutlet MKMapView *shotsMap;
 
 @end

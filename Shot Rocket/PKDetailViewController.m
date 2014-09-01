@@ -8,6 +8,7 @@
 
 #import "PKDetailViewController.h"
 #import "PKShotCell.h"
+#import "PKZoomingFlowLayout.h"
 #import "Shot.h"
 
 @interface PKDetailViewController ()
@@ -20,16 +21,6 @@
 }
 
 #pragma mark - Managing the detail item
-
-- (void)setShots:(NSArray *)shots
-{
-    if (_shots != shots) {
-        _shots = shots;
-        
-        // Update the view.
-        //[self configureView];
-    }
-}
 
 - (void)configureView
 {
@@ -48,7 +39,7 @@
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     self.animator.delegate = self;
     
-    [self loadNextShot];
+    //[self loadNextShot];
 }
 
 - (void)viewDidLoad
@@ -66,7 +57,7 @@
 }
 
 - (IBAction)likeShot {
-    Shot *shot = [self.shots objectAtIndex:i];
+    /*Shot *shot = [self.collectionView indexPathForItemAtPoint:<#(CGPoint)#>];
     NSError *error;
     
     shot.upVotes = [NSNumber numberWithInt:[shot.upVotes intValue] + 1];
@@ -74,16 +65,18 @@
     if (![shot save]) {
         NSLog(@"Error saving like");
     }
-    [self loadNextShot];
+    //[self loadNextShot];*/
 }
 
 - (IBAction)skipShot {
-    [self loadNextShot];
+    //[self loadNextShot];
 }
 - (IBAction)didDragShot:(UIPanGestureRecognizer *)sender {
     //[self.animator removeAllBehaviors];
     
-    CGPoint translation = [sender translationInView:self.view];
+    CGPoint translation = [sender translationInView:self.collectionView];
+    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:translation];
+    PKShotCell *selectedCell = (PKShotCell *)[self.collectionView cellForItemAtIndexPath:selectedIndexPath];
     UIGestureRecognizerState state = [sender state];
     __weak __typeof__(self) weakSelf = self;
     
@@ -96,7 +89,7 @@
             CGPoint anchor = translation;
             anchor.x += 160;
             anchor.y += 284;
-            UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.shotView attachedToAnchor: anchor];
+            UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:selectedCell attachedToAnchor: anchor];
             attachmentBehavior.length = 0.0;
             [self.animator removeAllBehaviors];
             [self.animator addBehavior:attachmentBehavior];
@@ -108,14 +101,14 @@
             
             
             if (translation.x > 0) { // right
-                UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.shotView] mode:UIPushBehaviorModeInstantaneous];
+                UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[selectedCell] mode:UIPushBehaviorModeInstantaneous];
                 pushBehavior.pushDirection = CGVectorMake(200.0, 0);
                 [self.animator removeAllBehaviors];
                 [self.animator addBehavior:pushBehavior];
                 //[self likeShot];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [weakSelf.animator removeAllBehaviors];
-                    UISnapBehavior *attachmentBehavior = [[UISnapBehavior alloc] initWithItem:weakSelf.shotView snapToPoint:self.view.center];
+                    UISnapBehavior *attachmentBehavior = [[UISnapBehavior alloc] initWithItem:selectedCell snapToPoint:self.view.center];
                     [weakSelf.animator addBehavior:attachmentBehavior];
                 });
                 /*[UIView animateWithDuration:0.5 animations:^{
@@ -150,7 +143,42 @@
     
 }
 
-- (void)loadNextShot
+- (IBAction)didPinchShot:(UIPinchGestureRecognizer *)sender {
+    if ([sender numberOfTouches] != 2)
+        return;
+    
+    
+    if (sender.state == UIGestureRecognizerStateBegan ||
+        sender.state == UIGestureRecognizerStateChanged) {
+        // Get the pinch points.
+        CGPoint p1 = [sender locationOfTouch:0 inView:[self collectionView]];
+        CGPoint p2 = [sender locationOfTouch:1 inView:[self collectionView]];
+        
+        // Compute the new spread distance.
+        CGFloat xd = p1.x - p2.x;
+        CGFloat yd = p1.y - p2.y;
+        CGFloat distance = sqrt(xd*xd + yd*yd);
+        
+        // Update the custom layout parameter and invalidate.
+        PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
+        
+        NSIndexPath *pinchedItem = [self.collectionView indexPathForItemAtPoint:CGPointMake(0.5*(p1.x+p2.x), 0.5*(p1.y+p2.y))];
+        [layout resizeItemAtIndexPath:pinchedItem withPinchDistance:distance];
+        [layout invalidateLayout];
+        
+    }
+    else if (sender.state == UIGestureRecognizerStateCancelled ||
+             sender.state == UIGestureRecognizerStateEnded){
+        PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
+        [self.collectionView
+         performBatchUpdates:^{
+             [layout setPinchedItemSize:CGSizeMake(320, 568)];
+         }
+         completion:nil];
+    }
+}
+
+/*- (void)loadNextShot
 {
     i = self.nextIndex;
     Shot *shot = [self.shots objectAtIndex:i];
@@ -177,7 +205,7 @@
     } failureBlock:^(NSError *error) {
         NSLog(@"Failed getting asset: %@", error.description);
     }];
-}
+}*/
 
 #pragma mark - Collection View Delegate
 
@@ -185,7 +213,7 @@
 {
     PKShotCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShotCell" forIndexPath:indexPath];
     Shot *shot = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"cell");
+    
     [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
         ALAssetRepresentation *representation = [asset defaultRepresentation];
         

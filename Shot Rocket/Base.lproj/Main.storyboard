@@ -89,7 +89,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="Pdu-gg-re1" customClass="PKZoomingFlowLayout"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YLI-At-gD3">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShotCell" id="k2J-zz-q4V" customClass="PKShotCell">
                                 <rect key="frame" x="0.0" y="64" width="80" height="80"/>
@@ -198,40 +203,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9L5-xf-kzV">
-                                <rect key="frame" x="4" y="0.0" width="312" height="173"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </mapView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4f-m0-raI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e34-hv-KMw">
-                                <rect key="frame" x="80" y="142" width="160" height="284"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="the-Nj-z9H">
-                                    <size key="itemSize" width="159" height="284"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="Qv3-0Y-zdG" customClass="PKZoomingFlowLayout"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShotCell" id="xqn-cF-zFr" customClass="PKShotCell">
-                                        <rect key="frame" x="1" y="0.0" width="159" height="284"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="ShotCell" id="xqn-cF-zFr" customClass="PKShotCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="159" height="284"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FmF-dv-F9c">
-                                                    <rect key="frame" x="-81" y="-142" width="320" height="568"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <size key="customSize" width="320" height="568"/>
                                         <connections>
                                             <outlet property="baseShotView" destination="FmF-dv-F9c" id="9jf-is-y9L"/>
                                         </connections>
@@ -240,6 +233,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="Ah7-4n-0Wa" id="ayS-Ng-nI4"/>
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="MF3-gR-Bay"/>
+                                    <outletCollection property="gestureRecognizers" destination="nKQ-1K-gk7" appends="YES" id="XUv-c5-EHa"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -249,8 +243,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="e34-hv-KMw" id="bx2-Qq-eZN"/>
-                        <outlet property="shotsMap" destination="9L5-xf-kzV" id="Goj-85-FHz"/>
-                        <outlet property="underShotView" destination="G4f-m0-raI" id="iCC-1Z-VYG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
@@ -259,8 +251,13 @@
                         <action selector="didDragShot:" destination="Ah7-4n-0Wa" id="wW6-8S-IRA"/>
                     </connections>
                 </panGestureRecognizer>
+                <pinchGestureRecognizer id="nKQ-1K-gk7">
+                    <connections>
+                        <action selector="didPinchShot:" destination="Ah7-4n-0Wa" id="Jty-xB-5mI"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1266" y="64"/>
+            <point key="canvasLocation" x="1256" y="64"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

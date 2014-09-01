@@ -10,4 +10,9 @@
 
 @interface PKZoomingFlowLayout : UICollectionViewFlowLayout
 
+@property (nonatomic, strong) NSIndexPath *pinchedItem;
+@property (nonatomic) CGSize pinchedItemSize;
+
+- (void)resizeItemAtIndexPath:(NSIndexPath*)indexPath withPinchDistance:(CGFloat)distance;
+
 @end
