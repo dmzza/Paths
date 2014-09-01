@@ -7,6 +7,7 @@
 //
 
 #import "PKDetailViewController.h"
+#import "PKShotCell.h"
 #import "Shot.h"
 
 @interface PKDetailViewController ()
@@ -26,7 +27,7 @@
         _shots = shots;
         
         // Update the view.
-        [self configureView];
+        //[self configureView];
     }
 }
 
@@ -37,6 +38,9 @@
     // Update the user interface for the detail item.
     if (self.startingIndex) {
         self.nextIndex = self.startingIndex;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(NSEC_PER_SEC/10)), dispatch_get_main_queue(), ^{
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.startingIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+        });
     } else {
         self.nextIndex = 0;
     }
@@ -175,6 +179,35 @@
     }];
 }
 
+#pragma mark - Collection View Delegate
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PKShotCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShotCell" forIndexPath:indexPath];
+    Shot *shot = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"cell");
+    [self.library assetForURL:[NSURL URLWithString:shot.assetUrl] resultBlock:^(ALAsset *asset) {
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+        
+        cell.baseShotView.image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:2.0 orientation:UIImageOrientationUp];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Failed getting asset: %@", error.description);
+    }];
+    
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    NSLog(@"sections: %ld", [super numberOfSectionsInCollectionView:collectionView]);
+    return [super numberOfSectionsInCollectionView:collectionView];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"section # %ld : %ld", section, [super collectionView:collectionView numberOfItemsInSection:section]);
+    
+    return [super collectionView:collectionView numberOfItemsInSection:section];
+}
+
 #pragma mark - UIDynamicAnimator delegate
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
@@ -186,6 +219,50 @@
 - (void)dynamicAnimatorWillResume:(UIDynamicAnimator *)animator
 {
     
+}
+
+#pragma mark - Configuration
+
++ (Class)fetchedResultsControllerClass {
+	return [NSFetchedResultsController class];
+}
+
+
+- (NSFetchRequest *)fetchRequest {
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [self.entityClass entityWithContext:self.managedObjectContext];
+	fetchRequest.sortDescriptors = self.sortDescriptors;
+	fetchRequest.predicate = self.predicate;
+	return fetchRequest;
+}
+
+
+- (Class)entityClass {
+	return [Shot class];
+}
+
+
+- (NSArray *)sortDescriptors {
+	return [[self entityClass] defaultSortDescriptors];
+}
+
+
+- (NSPredicate *)predicate {
+	return [NSPredicate predicateWithFormat:@"dateStamp = %@", self.dateStamp];
+}
+
+
+- (NSManagedObjectContext *)managedObjectContext {
+    return [[self entityClass] mainQueueContext];
+}
+
+/*- (NSString *)cacheName {
+	return self.title;
+}*/
+
+- (BOOL)useLayoutToLayoutNavigationTransitions
+{
+    return NO;
 }
 
 @end

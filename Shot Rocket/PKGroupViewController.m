@@ -48,10 +48,10 @@
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.collectionView indexPathsForSelectedItems][0];
         NSString *date = [[self.shots firstObject] dateString];
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         [[segue destinationViewController] setStartingIndex:indexPath.item];
         [[segue destinationViewController] setShots:self.shots];
         [[segue destinationViewController] setTitle:date];
+        [[segue destinationViewController] setDateStamp:self.dateStamp];
     }
 }
 
@@ -80,6 +80,11 @@
         NSLog(@"Failed getting asset: %@", error.description);
     }];
     return cell;
+}
+
+- (BOOL)useLayoutToLayoutNavigationTransitions
+{
+    return NO;
 }
 
 @end

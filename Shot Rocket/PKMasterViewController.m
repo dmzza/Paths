@@ -7,7 +7,7 @@
 //
 
 #import "PKMasterViewController.h"
-#import "PKDetailViewController.h"
+#import "PKGroupViewController.h"
 #import "PKGroupCell.h"
 #import "Shot.h"
 #import "PKShotSync.h"
@@ -109,10 +109,12 @@
         //NSLog(@"%u", [(id<NSFetchedResultsSectionInfo>)self.fetchedResultsController.sections[0] objects].count);
         NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.section] objects];
         NSString *date = [[shots firstObject] dateString];
+        NSString *dateStamp = [[shots firstObject] dateStamp];
         
-        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setManagedObjectContext:self.managedObjectContext];
-        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setShots:shots];
-        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setTitle:date];
+        [(PKGroupViewController *)[[segue destinationViewController] topViewController] setManagedObjectContext:self.managedObjectContext];
+        [(PKGroupViewController *)[[segue destinationViewController] topViewController] setShots:shots];
+        [(PKGroupViewController *)[[segue destinationViewController] topViewController] setTitle:date];
+        [(PKGroupViewController *)[[segue destinationViewController] topViewController] setDateStamp:dateStamp];
     }
 }
 

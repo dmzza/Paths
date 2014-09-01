@@ -15,5 +15,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSArray *shots;
 @property (strong, nonatomic) ALAssetsLibrary *library;
+@property (strong, nonatomic) NSString *dateStamp;
 
 @end

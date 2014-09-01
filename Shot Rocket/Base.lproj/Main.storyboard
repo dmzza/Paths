@@ -118,7 +118,7 @@
                                     <outlet property="baseShotView" destination="ZMd-b9-DUm" id="qyL-ZG-Q8q"/>
                                     <outlet property="middleShotView" destination="QQQ-aq-Nxg" id="2bH-Hm-aMr"/>
                                     <outlet property="topShotView" destination="dW1-b4-1gz" id="Sat-ze-4Yh"/>
-                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="Z2y-9t-sbP"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="Uhi-OP-npW"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -152,6 +152,7 @@
         <!--Collection View Controller-->
         <scene sceneID="3Jb-Zw-gLk">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="525-CG-WDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="z65-QN-lj0" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="cao-Ub-jnq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -179,8 +180,9 @@
                             <outlet property="delegate" destination="z65-QN-lj0" id="UFi-AA-Z5O"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="ml5-UL-MIQ"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="525-CG-WDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1266" y="757"/>
         </scene>
@@ -204,21 +206,49 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FmF-dv-F9c">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e34-hv-KMw">
+                                <rect key="frame" x="80" y="142" width="160" height="284"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="the-Nj-z9H">
+                                    <size key="itemSize" width="159" height="284"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ShotCell" id="xqn-cF-zFr" customClass="PKShotCell">
+                                        <rect key="frame" x="1" y="0.0" width="159" height="284"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="159" height="284"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FmF-dv-F9c">
+                                                    <rect key="frame" x="-81" y="-142" width="320" height="568"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <gestureRecognizers/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="baseShotView" destination="FmF-dv-F9c" id="9jf-is-y9L"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="MTw-fr-Kxq" appends="YES" id="8Nu-Sz-MeZ"/>
+                                    <outlet property="dataSource" destination="Ah7-4n-0Wa" id="ayS-Ng-nI4"/>
+                                    <outlet property="delegate" destination="Ah7-4n-0Wa" id="MF3-gR-Bay"/>
                                 </connections>
-                            </imageView>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="shotView" destination="FmF-dv-F9c" id="VuL-r0-MdZ"/>
+                        <outlet property="collectionView" destination="e34-hv-KMw" id="bx2-Qq-eZN"/>
                         <outlet property="shotsMap" destination="9L5-xf-kzV" id="Goj-85-FHz"/>
                         <outlet property="underShotView" destination="G4f-m0-raI" id="iCC-1Z-VYG"/>
                     </connections>

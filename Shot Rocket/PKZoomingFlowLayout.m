@@ -10,4 +10,9 @@
 
 @implementation PKZoomingFlowLayout
 
+- (UICollectionViewScrollDirection)scrollDirection
+{
+    return UICollectionViewScrollDirectionVertical;
+}
+
 @end
