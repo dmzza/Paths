@@ -110,9 +110,9 @@
         NSArray *shots = [(id<NSFetchedResultsSectionInfo>)[self.fetchedResultsController sections][indexPath.section] objects];
         NSString *date = [[shots firstObject] dateString];
         
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        [[segue destinationViewController] setShots:shots];
-        [[segue destinationViewController] setTitle:date];
+        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setManagedObjectContext:self.managedObjectContext];
+        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setShots:shots];
+        [(PKDetailViewController *)[[segue destinationViewController] topViewController] setTitle:date];
     }
 }
 
