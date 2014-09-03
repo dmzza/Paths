@@ -22,7 +22,7 @@
     return UICollectionViewScrollDirectionVertical;
 }
 
-/*- (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
+- (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
     
     NSArray *attrs = [super layoutAttributesForElementsInRect:rect];
@@ -47,7 +47,7 @@
     }
     
     return attr;
-}*/
+}
 
 
 -(CGSize)itemSize
@@ -60,6 +60,12 @@
     self.pinchedItem = indexPath;
     self.pinchedItemSize = CGSizeMake(distance, distance * 568 / 320);
     
+}
+
+- (void)translateItemAtIndexPath:(NSIndexPath *)indexPath withTranslation:(CGPoint)translation
+{
+    self.draggedItem = indexPath;
+    self.draggedTo = translation;
 }
 
 @end

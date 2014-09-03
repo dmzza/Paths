@@ -12,7 +12,10 @@
 
 @property (nonatomic, strong) NSIndexPath *pinchedItem;
 @property (nonatomic) CGSize pinchedItemSize;
+@property (nonatomic, strong) NSIndexPath *draggedItem;
+@property (nonatomic) CGPoint draggedTo;
 
 - (void)resizeItemAtIndexPath:(NSIndexPath*)indexPath withPinchDistance:(CGFloat)distance;
+- (void)translateItemAtIndexPath:(NSIndexPath *)indexPath withTranslation:(CGPoint)translation;
 
 @end

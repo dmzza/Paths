@@ -75,8 +75,8 @@
     //[self.animator removeAllBehaviors];
     
     CGPoint translation = [sender translationInView:self.collectionView];
-    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:translation];
-    PKShotCell *selectedCell = (PKShotCell *)[self.collectionView cellForItemAtIndexPath:selectedIndexPath];
+    NSIndexPath *draggedItem = [self.collectionView indexPathForItemAtPoint:translation];
+    PKShotCell *selectedCell = (PKShotCell *)[self.collectionView cellForItemAtIndexPath:draggedItem];
     UIGestureRecognizerState state = [sender state];
     __weak __typeof__(self) weakSelf = self;
     
@@ -89,10 +89,15 @@
             CGPoint anchor = translation;
             anchor.x += 160;
             anchor.y += 284;
-            UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:selectedCell attachedToAnchor: anchor];
+            /*UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:selectedCell attachedToAnchor: anchor];
             attachmentBehavior.length = 0.0;
             [self.animator removeAllBehaviors];
-            [self.animator addBehavior:attachmentBehavior];
+            [self.animator addBehavior:attachmentBehavior];*/
+            
+            PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
+            
+            [layout translateItemAtIndexPath:draggedItem withTranslation:translation];
+            [layout invalidateLayout];
             break;
         }
             
