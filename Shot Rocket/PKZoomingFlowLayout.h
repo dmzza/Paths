@@ -10,6 +10,12 @@
 
 @interface PKZoomingFlowLayout : UICollectionViewFlowLayout
 
+/// The default resistance factor that determines the bounce of the collection. Default is 900.0f.
+#define kScrollResistanceFactorDefault 900.0f;
+
+@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;
+/// The scrolling resistance factor determines how much bounce / resistance the collection has. A higher number is less bouncy, a lower number is more bouncy. The default is 900.0f.
+@property (nonatomic, assign) CGFloat scrollResistanceFactor;
 @property (nonatomic, strong) NSIndexPath *pinchedItem;
 @property (nonatomic) CGSize pinchedItemSize;
 @property (nonatomic, strong) NSIndexPath *draggedItem;
