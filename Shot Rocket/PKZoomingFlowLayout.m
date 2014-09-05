@@ -16,7 +16,7 @@
     self.pinchedItem = 0;
     self.pinchedItemSize = CGSizeMake(320, 568);
     self.scaledItem = 0;
-    self.scaleFactor = 1.0;
+    _scaleFactor = 1.0;
 }
 
 - (UICollectionViewScrollDirection)scrollDirection
@@ -26,23 +26,16 @@
 
 - (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    
     NSArray *attrs = [super layoutAttributesForElementsInRect:rect];
-    //    NSLog(@"attributes for rect %@\n%@", NSStringFromCGRect(rect), attrs);
     
-    if (_pinchedItem) {
-        UICollectionViewLayoutAttributes *attr = [[attrs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"indexPath == %@", _pinchedItem]] firstObject];
-        
-        attr.size = _pinchedItemSize;
-        attr.zIndex = 100;
-    }
     if (_scaledItem) {
         
         for (UICollectionViewLayoutAttributes *attr in attrs) {
             attr.transform = CGAffineTransformMakeScale(self.scaleFactor, self.scaleFactor);
+            attr.zIndex = 100;
         }
         UICollectionViewLayoutAttributes *attr = [[attrs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"indexPath == %@", _scaledItem]] firstObject];
-        attr.zIndex = 100;
+        attr.zIndex = 1;
     }
     return attrs;
 }
@@ -51,22 +44,13 @@
 {
     UICollectionViewLayoutAttributes *attr = [super layoutAttributesForItemAtIndexPath:indexPath];
     
-    if ([indexPath isEqual:_pinchedItem]) {
-        attr.size = _pinchedItemSize;
-        attr.zIndex = 100;
-    }
-    
-    //if ([ indexPath isEqual:_scaledItem]) {
-    //    attr.transform = CGAffineTransformMakeScale(self.scaleFactor, self.scaleFactor);
-    //}
-    
     return attr;
 }
 
 
 -(CGSize)itemSize
 {
-    return CGSizeMake(self.pinchedItemSize.width, self.pinchedItemSize.height);
+    return CGSizeMake(320 * self.scaleFactor, 568 * self.scaleFactor);
 }
 
 - (void)resizeItemAtIndexPath:(NSIndexPath*)indexPath withPinchDistance:(CGFloat)distance
@@ -86,6 +70,11 @@
 {
     self.draggedItem = indexPath;
     self.draggedTo = translation;
+}
+
+- (void)setScaleFactor:(CGFloat)scaleFactor
+{
+    _scaleFactor = MIN(scaleFactor, 1.0);
 }
 
 @end
