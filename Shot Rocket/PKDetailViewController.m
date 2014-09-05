@@ -149,11 +149,16 @@
 }
 
 - (IBAction)didPinchShot:(UIPinchGestureRecognizer *)sender {
-    if ([sender numberOfTouches] != 2) {
+    if ([sender numberOfTouches] != 2 ||
+        sender.state == UIGestureRecognizerStateCancelled ||
+        sender.state == UIGestureRecognizerStateEnded) {
         PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
         
-        [layout setScaleFactor:1.0];
-        [layout invalidateLayout];
+        [UIView animateWithDuration:0.3 animations:^{
+            [layout setScaleFactor:1.0];
+            [layout invalidateLayout];
+        }];
+        
         return;
     }
     
@@ -178,13 +183,6 @@
         [layout scaleItemAtIndexPath:pinchedItem withScaleFactor:[sender scale]];
         [layout invalidateLayout];
         
-    }
-    else if (sender.state == UIGestureRecognizerStateCancelled ||
-             sender.state == UIGestureRecognizerStateEnded){
-        PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
-        
-        [layout setScaleFactor:1.0];
-        [layout invalidateLayout];
     }
 }
 
