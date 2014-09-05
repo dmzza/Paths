@@ -241,6 +241,13 @@
     return [super collectionView:collectionView numberOfItemsInSection:section];
 }
 
+#pragma mark - UIScrollView delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+}
+
 #pragma mark - UIDynamicAnimator delegate
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
