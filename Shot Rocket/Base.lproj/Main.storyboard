@@ -234,7 +234,6 @@
                                     <outlet property="dataSource" destination="Ah7-4n-0Wa" id="ayS-Ng-nI4"/>
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="MF3-gR-Bay"/>
                                     <outletCollection property="gestureRecognizers" destination="nKQ-1K-gk7" appends="YES" id="XUv-c5-EHa"/>
-                                    <outletCollection property="gestureRecognizers" destination="MTw-fr-Kxq" appends="YES" id="ocQ-gF-AwU"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -255,6 +254,7 @@
                 <pinchGestureRecognizer id="nKQ-1K-gk7">
                     <connections>
                         <action selector="didPinchShot:" destination="Ah7-4n-0Wa" id="Jty-xB-5mI"/>
+                        <outlet property="delegate" destination="Ah7-4n-0Wa" id="ZFd-gS-rLE"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>

@@ -15,6 +15,8 @@
 {
     self.pinchedItem = 0;
     self.pinchedItemSize = CGSizeMake(320, 568);
+    self.scaledItem = 0;
+    self.scaleFactor = 1.0;
 }
 
 - (UICollectionViewScrollDirection)scrollDirection
@@ -34,6 +36,14 @@
         attr.size = _pinchedItemSize;
         attr.zIndex = 100;
     }
+    if (_scaledItem) {
+        
+        for (UICollectionViewLayoutAttributes *attr in attrs) {
+            attr.transform = CGAffineTransformMakeScale(self.scaleFactor, self.scaleFactor);
+        }
+        UICollectionViewLayoutAttributes *attr = [[attrs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"indexPath == %@", _scaledItem]] firstObject];
+        attr.zIndex = 100;
+    }
     return attrs;
 }
 
@@ -45,6 +55,10 @@
         attr.size = _pinchedItemSize;
         attr.zIndex = 100;
     }
+    
+    //if ([ indexPath isEqual:_scaledItem]) {
+    //    attr.transform = CGAffineTransformMakeScale(self.scaleFactor, self.scaleFactor);
+    //}
     
     return attr;
 }
@@ -60,6 +74,12 @@
     self.pinchedItem = indexPath;
     self.pinchedItemSize = CGSizeMake(distance, distance * 568 / 320);
     
+}
+
+- (void)scaleItemAtIndexPath:(NSIndexPath*)indexPath withScaleFactor:(CGFloat)scale
+{
+    self.scaledItem = indexPath;
+    self.scaleFactor = scale;
 }
 
 - (void)translateItemAtIndexPath:(NSIndexPath *)indexPath withTranslation:(CGPoint)translation
