@@ -248,7 +248,19 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    UIPanGestureRecognizer *recognizer = [scrollView panGestureRecognizer];
     
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint offset = [scrollView contentOffset];
+    PKZoomingFlowLayout* layout = (PKZoomingFlowLayout*)[[self collectionView] collectionViewLayout];
+    NSIndexPath *pinchedItem = [self.collectionView indexPathForItemAtPoint:offset];
+    
+    NSLog(@"scrolled: %f mod: %f", offset.y, fmod(offset.y, 568.0));
+    //[layout resizeItemAtIndexPath:pinchedItem withPinchDistance:fmod(offset.y, 568.0)];
+    //[layout invalidateLayout];
 }
 
 #pragma mark - UIDynamicAnimator delegate

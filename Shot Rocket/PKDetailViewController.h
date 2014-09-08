@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <SSDataKit/SSDataKit.h>
 
-@interface PKDetailViewController : SSManagedCollectionViewController <UIDynamicAnimatorDelegate>
+@interface PKDetailViewController : SSManagedCollectionViewController <UIDynamicAnimatorDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) ALAssetsLibrary *library;
 @property (strong, nonatomic) NSString *dateStamp;

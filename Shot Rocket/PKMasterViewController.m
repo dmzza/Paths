@@ -32,6 +32,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:note waitUntilDone:NO];
+        [self.managedObjectContext performSelectorOnMainThread:@selector(save:) withObject:nil waitUntilDone:NO];
     }];
 }
 
@@ -52,10 +53,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.fetchedResultsController == nil) {
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    if (sectionInfo != nil && [sectionInfo numberOfObjects] >= 1) {
+        return 1;
+    } else {
         return 0;
     }
-    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
