@@ -47,6 +47,10 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79c-Qr-2EY">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
                                                 </imageView>
+                                                <view alpha="0.19999999999999968" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfu-tA-cQ7" customClass="PKGradientView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Month 13, 2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20X-fc-ppm">
                                                     <rect key="frame" x="15" y="81" width="290" height="44"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
