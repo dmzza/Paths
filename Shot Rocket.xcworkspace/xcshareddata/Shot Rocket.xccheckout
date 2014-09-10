@@ -12,20 +12,24 @@
 	<dict>
 		<key>2845CA99-9CC2-4A4A-BCD0-E05E7D183FDD</key>
 		<string>https://github.com/dmzza/Paths.git</string>
+		<key>76B4ED68EBBB0F40C29645F67206E7784650A104</key>
+		<string>https://github.com/dmzza/Paths.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Shot Rocket.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2845CA99-9CC2-4A4A-BCD0-E05E7D183FDD</key>
+		<string>../../Shot Rocket</string>
+		<key>76B4ED68EBBB0F40C29645F67206E7784650A104</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/dmzza/Paths.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2845CA99-9CC2-4A4A-BCD0-E05E7D183FDD</string>
+	<string>76B4ED68EBBB0F40C29645F67206E7784650A104</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>2845CA99-9CC2-4A4A-BCD0-E05E7D183FDD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Shot Rocket</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>76B4ED68EBBB0F40C29645F67206E7784650A104</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Shot%20Rocket</string>
 		</dict>
 	</array>
 </dict>
