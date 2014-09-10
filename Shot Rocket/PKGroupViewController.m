@@ -54,6 +54,12 @@
     }
 }
 
+- (IBAction)dismiss:(id)sender {
+    [[self.navigationController presentingViewController] dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 #pragma mark - Collection View delegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
