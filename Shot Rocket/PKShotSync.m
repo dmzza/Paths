@@ -38,13 +38,13 @@
             //shot.parent = [shotDictionary objectForKey:@""];
             
             if ([shot save]) {
-                NSLog(@"Shot created");
+                //NSLog(@"Shot created");
             } else {
                 NSLog(@"Couldn't save shot");
             }
         
         } else {
-            NSLog(@"Shot already exists");
+            //NSLog(@"Shot already exists");
         }
     }];
 }

@@ -48,8 +48,6 @@
                             location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
                         }
                         if (location != nil) {
-                            NSLog(@"photo");
-                        
                             ALAssetRepresentation *representation = [result defaultRepresentation];
                             if (representation == nil) {
                                 return;
