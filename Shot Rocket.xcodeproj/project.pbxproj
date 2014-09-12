@@ -164,29 +164,17 @@
 				638F396E198201CF00E99818 /* PKAppDelegate.h */,
 				638F396F198201CF00E99818 /* PKAppDelegate.m */,
 				638F3971198201CF00E99818 /* Main.storyboard */,
-				638F3977198201CF00E99818 /* PKMasterViewController.h */,
-				638F3978198201CF00E99818 /* PKMasterViewController.m */,
-				638F397A198201CF00E99818 /* PKDetailViewController.h */,
-				638F397B198201CF00E99818 /* PKDetailViewController.m */,
 				638F397D198201CF00E99818 /* Images.xcassets */,
-				638F3974198201CF00E99818 /* Shot_Rocket.xcdatamodeld */,
-				638F3966198201CF00E99818 /* Supporting Files */,
+				AA0E8C9C19C2CE0F00C543AD /* Models */,
+				AA0E8C9D19C2CE2F00C543AD /* Views */,
+				AA0E8C9B19C2CDB700C543AD /* Controllers */,
 				638F399B19820DE900E99818 /* PKCameraRoll.h */,
 				638F399C19820DE900E99818 /* PKCameraRoll.m */,
-				638F399E19820EC100E99818 /* PKGroupCell.h */,
-				638F399F19820EC100E99818 /* PKGroupCell.m */,
-				634DB72E198D81D000EF6F6F /* PKShotCell.h */,
-				634DB72F198D81D000EF6F6F /* PKShotCell.m */,
-				634DB731198D85C300EF6F6F /* PKGroupViewController.h */,
-				634DB732198D85C300EF6F6F /* PKGroupViewController.m */,
 				638BD013198F6CDA00B820AF /* PKShotSync.h */,
 				638BD014198F6CDA00B820AF /* PKShotSync.m */,
-				638BD016198F6FBF00B820AF /* Shot.h */,
-				638BD017198F6FBF00B820AF /* Shot.m */,
 				AA4A874319B45882008FD30D /* PKZoomingFlowLayout.h */,
 				AA4A874419B45882008FD30D /* PKZoomingFlowLayout.m */,
-				AA049D6A19BED38F00A32397 /* PKGradientView.h */,
-				AA049D6B19BED38F00A32397 /* PKGradientView.m */,
+				638F3966198201CF00E99818 /* Supporting Files */,
 			);
 			path = "Shot Rocket";
 			sourceTree = "<group>";
@@ -218,6 +206,42 @@
 				638F398E198201CF00E99818 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA0E8C9B19C2CDB700C543AD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				638F3977198201CF00E99818 /* PKMasterViewController.h */,
+				638F3978198201CF00E99818 /* PKMasterViewController.m */,
+				634DB731198D85C300EF6F6F /* PKGroupViewController.h */,
+				634DB732198D85C300EF6F6F /* PKGroupViewController.m */,
+				638F397A198201CF00E99818 /* PKDetailViewController.h */,
+				638F397B198201CF00E99818 /* PKDetailViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		AA0E8C9C19C2CE0F00C543AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				638F3974198201CF00E99818 /* Shot_Rocket.xcdatamodeld */,
+				638BD016198F6FBF00B820AF /* Shot.h */,
+				638BD017198F6FBF00B820AF /* Shot.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		AA0E8C9D19C2CE2F00C543AD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				638F399E19820EC100E99818 /* PKGroupCell.h */,
+				638F399F19820EC100E99818 /* PKGroupCell.m */,
+				634DB72E198D81D000EF6F6F /* PKShotCell.h */,
+				634DB72F198D81D000EF6F6F /* PKShotCell.m */,
+				AA049D6A19BED38F00A32397 /* PKGradientView.h */,
+				AA049D6B19BED38F00A32397 /* PKGradientView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
