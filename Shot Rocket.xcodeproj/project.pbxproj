@@ -34,6 +34,7 @@
 		638F39A019820EC100E99818 /* PKGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 638F399F19820EC100E99818 /* PKGroupCell.m */; };
 		638F39A21982163700E99818 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638F39A11982163700E99818 /* AssetsLibrary.framework */; };
 		AA049D6C19BED38F00A32397 /* PKGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA049D6B19BED38F00A32397 /* PKGradientView.m */; };
+		AA0E8CA019C2DD0500C543AD /* PKZoomInTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0E8C9F19C2DD0500C543AD /* PKZoomInTransition.m */; };
 		AA4A874519B45882008FD30D /* PKZoomingFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4A874419B45882008FD30D /* PKZoomingFlowLayout.m */; };
 		AAAC21751989A5270086C54E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAC21741989A5270086C54E /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,8 @@
 		A62C5165EAA546E5998DE9C3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		AA049D6A19BED38F00A32397 /* PKGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKGradientView.h; sourceTree = "<group>"; };
 		AA049D6B19BED38F00A32397 /* PKGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKGradientView.m; sourceTree = "<group>"; };
+		AA0E8C9E19C2DD0500C543AD /* PKZoomInTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKZoomInTransition.h; sourceTree = "<group>"; };
+		AA0E8C9F19C2DD0500C543AD /* PKZoomInTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKZoomInTransition.m; sourceTree = "<group>"; };
 		AA4A874319B45882008FD30D /* PKZoomingFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKZoomingFlowLayout.h; sourceTree = "<group>"; };
 		AA4A874419B45882008FD30D /* PKZoomingFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKZoomingFlowLayout.m; sourceTree = "<group>"; };
 		AAAC21741989A5270086C54E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -175,6 +178,8 @@
 				AA4A874319B45882008FD30D /* PKZoomingFlowLayout.h */,
 				AA4A874419B45882008FD30D /* PKZoomingFlowLayout.m */,
 				638F3966198201CF00E99818 /* Supporting Files */,
+				AA0E8C9E19C2DD0500C543AD /* PKZoomInTransition.h */,
+				AA0E8C9F19C2DD0500C543AD /* PKZoomInTransition.m */,
 			);
 			path = "Shot Rocket";
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				638BD015198F6CDA00B820AF /* PKShotSync.m in Sources */,
 				638F3979198201CF00E99818 /* PKMasterViewController.m in Sources */,
 				638F397C198201CF00E99818 /* PKDetailViewController.m in Sources */,
+				AA0E8CA019C2DD0500C543AD /* PKZoomInTransition.m in Sources */,
 				638F3970198201CF00E99818 /* PKAppDelegate.m in Sources */,
 				638BD018198F6FBF00B820AF /* Shot.m in Sources */,
 				AA4A874519B45882008FD30D /* PKZoomingFlowLayout.m in Sources */,
